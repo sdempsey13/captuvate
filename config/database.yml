@@ -81,8 +81,8 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: captuvate_production
-    username: captuvate
+    database: captuvateproduction
+    username: captuvateproduction
     password: <%= ENV["CAPTUVATE_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
