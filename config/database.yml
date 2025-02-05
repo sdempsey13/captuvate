@@ -84,7 +84,7 @@ production:
     host: app-14445458-c7f7-407d-932e-50c2c6798032-do-user-18938801-0.k.db.ondigitalocean.com
     port: 25060
     database: captuvateproduction
-    username: captuvateproduction
+    username: postgres
     password: <%= ENV["CAPTUVATE_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
