@@ -23,9 +23,17 @@
   </head>
 
   <body>
-    <%= flash_message(:notice) %>
-    <%= flash_message(:alert) %>
-    
-    <%= yield %>
+    <div class="container-fluid">
+      <% if user_signed_in? %>
+        <%= render "navbar_user" %>
+      <% else %>
+        <%= render "navbar_guest" %>
+      <% end %>
+
+      <%= flash_message(:notice) %>
+      <%= flash_message(:alert) %>
+      
+      <%= yield %>
+    </div>
   </body>
 </html>
