@@ -81,7 +81,7 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    host: app-14445458-c7f7-407d-932e-50c2c6798032-do-user-18938801-0.k.db.ondigitalocean.com
+    host: app-647f88f4-ce01-4311-8054-08655f4c3cea-do-user-18938801-0.k.db.ondigitalocean.com
     port: 25060
     database: captuvateproduction
     username: captuvateproduction
