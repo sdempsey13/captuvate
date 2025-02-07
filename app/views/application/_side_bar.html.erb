@@ -1,0 +1,12 @@
+<div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+  <ul>
+    <li>
+      <%= link_to "All of my Domains", pages_path %>
+    </li>
+    <% @pages.each do |page| %>
+      <li>
+        <%= link_to "#{page.url}", page_groups_path(page.page_group), class: "" %>
+      </li>
+    <% end %>
+  </ul>  
+</div>

@@ -7,8 +7,7 @@ class PagesController < ApplicationController
   end
 
   def show
-    
-    # all pages joined to this one through their page_group
+    @pages = current_user.pages
   end
 
   def new
