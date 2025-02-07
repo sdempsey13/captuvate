@@ -3,7 +3,6 @@ class PageGroupsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    binding.pry
     @pages = current_user.pages
     @page_group_pages = @page_group.pages
   end
