@@ -10,15 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_06_010257) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_07_043229) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "page_groups", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "pages", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "page_group_id", null: false
+    t.index ["page_group_id"], name: "index_pages_on_page_group_id"
     t.index ["user_id"], name: "index_pages_on_user_id"
   end
 
@@ -34,5 +41,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_06_010257) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "pages", "page_groups"
   add_foreign_key "pages", "users"
 end

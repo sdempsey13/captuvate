@@ -7,6 +7,8 @@ class PagesController < ApplicationController
   end
 
   def show
+    
+    # all pages joined to this one through their page_group
   end
 
   def new
@@ -18,6 +20,11 @@ class PagesController < ApplicationController
 
   def create
     @page = Page.new(page_params)
+
+    page_group = PageGroup.new
+    page_group.save!
+
+    @page.page_group_id = page_group.id
 
     respond_to do |format|
       if @page.save

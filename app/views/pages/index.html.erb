@@ -1,31 +1,36 @@
 <div class="row">
-    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
-      <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
-                <svg class="bi"><use xlink:href="#house-fill"/></svg>
-                Your Pages Will Be Here
-              </a>
-            </li>
-          </ul>
-        </div>
+  <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+    <ul>
+      <% @pages.each do |page| %>
+        <li>
+          <%= link_to "#{page.url}", page_path(page), class: "" %>
+        </li>
+      <% end %>
+    </ul>  
+  </div>
+
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">Domains</h1>
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <%= button_to '+ Add Domain', new_page_path, method: :get, class: 'btn btn-secondary' %>
       </div>
     </div>
-
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <%= button_to '+ Add URL', new_page_path, method: :get, class: 'btn btn-secondary' %>
+    
+    <div class="row">
+      <% @pages.each do |page| %>
+        <div class="col-md-4 pb-5">
+          <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <%= link_to "#{page.url}", page_path(page), class: "" %>
+            </div>
+          </div>  
         </div>
-      </div>
+      <% end %>
+    </div>
+    
+    <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+  </main>
+</div>
 
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-    </main>
-  </div>
