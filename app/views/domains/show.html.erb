@@ -1,29 +1,26 @@
 <div class="row">
 
   <%= render "side_bar" %>
-
+  
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2">Domains</h1>
+      <h1 class="h2">Search</h1>
       <div class="btn-toolbar mb-2 mb-md-0">
-        <%= button_to '+ Add Domain', new_page_path, method: :get, class: 'btn btn-secondary' %>
+        Settings/Edit
       </div>
     </div>
     
     <div class="row">
-      <% @pages.each do |page| %>
         <div class="col-md-4 pb-5">
           <div class="card" style="width: 18rem;">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
-              <%= link_to "#{page.url}", page_path(page), class: "" %>
+              <%= @domain.url %>
             </div>
           </div>  
         </div>
-      <% end %>
     </div>
     
     <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
   </main>
 </div>
-

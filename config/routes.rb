@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :pages
+  resources :domains
 
   get "page_groups/:id", to: "page_groups#show", as: :page_groups
 
