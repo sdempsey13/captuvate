@@ -10,23 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_07_043229) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_08_202801) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
-  create_table "page_groups", force: :cascade do |t|
+  create_table "domains", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "url", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_domains_on_user_id"
   end
 
-  create_table "pages", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "url"
+  create_table "snap_shots", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "page_group_id", null: false
-    t.index ["page_group_id"], name: "index_pages_on_page_group_id"
-    t.index ["user_id"], name: "index_pages_on_user_id"
+    t.bigint "domain_id", null: false
+    t.index ["domain_id"], name: "index_snap_shots_on_domain_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -41,6 +41,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_07_043229) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "pages", "page_groups"
-  add_foreign_key "pages", "users"
+  add_foreign_key "domains", "users"
+  add_foreign_key "snap_shots", "domains"
 end
