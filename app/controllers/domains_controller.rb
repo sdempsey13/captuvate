@@ -7,6 +7,7 @@ class DomainsController < ApplicationController
   end
 
   def show
+    @domain = current_user.domains.find(params[:id])
     @domains = current_user.domains
   end
 
@@ -53,11 +54,11 @@ class DomainsController < ApplicationController
   end
 
   private
-    def set_domain
-      @domain = Domain.find(params.expect(:id))
-    end
+  def set_domain
+    @domain = Domain.find(params.expect(:id))
+  end
 
-    def domain_params
-      params.expect(domain: [ :user_id, :url ])
-    end
+  def domain_params
+    params.expect(domain: [ :user_id, :url ])
+  end
 end

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :domains
 
-  get "page_groups/:id", to: "page_groups#show", as: :page_groups
+  get "snap_shots/:id", to: "snap_shots#show", as: :snap_shots
 
   get "up" => "rails/health#show", as: :rails_health_check
 

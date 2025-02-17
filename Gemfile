@@ -24,6 +24,8 @@ gem 'bootstrap', '~> 5.3.3'
 gem 'dartsass-rails', '~> 0.5.1'
 
 gem 'selenium-webdriver', '~> 4.28'
+gem "image_processing", "~> 1.2"
+gem 'mini_magick', '~> 5.1', '>= 5.1.2'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
