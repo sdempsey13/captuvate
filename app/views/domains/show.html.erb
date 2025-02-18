@@ -16,7 +16,7 @@
           <div class="card">
             <%= image_tag snap_shot.screen_shot.variant(:thumb) %>
             <div class="card-body">
-            <%= link_to "This Snap Shot", snap_shots_path, class: "" %>
+            <%= link_to "This Snap Shot", snap_shots_path(snap_shot), class: "" %>
             </div>
           </div>  
         <% end %>
