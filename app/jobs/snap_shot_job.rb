@@ -14,6 +14,9 @@ class SnapShotJob < ApplicationJob
       take_snap_shot(domain)
       puts "attaching image to snap shot"
       attach_img_to_snap_shot
+    rescue StandardError => e
+      puts "Error creating Selenium WebDriver: #{e.message}"
+      puts e.backtrace
     end
 
     private
