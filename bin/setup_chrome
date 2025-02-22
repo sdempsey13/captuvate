@@ -10,14 +10,18 @@ mkdir -p bin
 
 # Download Chromium (latest stable version)
 echo "Downloading Chromium..."
-wget -qO- https://storage.googleapis.com/chrome-for-testing-public/126.0.6478.126/linux64/chrome-linux64.zip | funzip > chrome-linux64.zip
+wget -qO chromium.tar.bz2 https://storage.googleapis.com/chrome-for-testing/126.0.6478.126/linux64/chromium-browser-linux64.tar.bz2
 
-# Extract and move to bin directory
-unzip -q chrome-linux64.zip -d bin/
-mv bin/chrome-linux64 "$CHROME_DIR"
-rm chrome-linux64.zip
+# Extract the tar.bz2 file
+echo "Extracting Chromium..."
+tar -xvjf chromium.tar.bz2 -C bin/
+
+# Move it to the appropriate location
+mv bin/chromium-browser-linux64 "$CHROME_DIR"
+rm chromium.tar.bz2
 
 # Make it executable
 chmod +x "$CHROME_DIR/chrome"
 
 echo "Chromium installed successfully."
+
