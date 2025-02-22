@@ -14,9 +14,6 @@ class SnapShotJob < ApplicationJob
       take_snap_shot(domain)
       puts "attaching image to snap shot"
       attach_img_to_snap_shot
-
-    rescue => e
-      puts "#{e}"
     end
 
     private
@@ -32,6 +29,7 @@ class SnapShotJob < ApplicationJob
     end
 
     def take_snap_shot(domain)
+      puts "options"
       options = Selenium::WebDriver::Chrome::Options.new
       options.add_argument("--headless")
       options.add_argument("--no-sandbox")
@@ -39,13 +37,19 @@ class SnapShotJob < ApplicationJob
       options.add_argument("--disable-gpu")
       options.add_argument("--window-size=1280x1024")
 
+      puts "driver"
       driver = Selenium::WebDriver.for :chrome, options: options
+      
+      puts "navigate to"
       driver.navigate.to domain.url
 
       full_height = driver.execute_script("return document.body.scrollHeight")
 
+      puts "resize"
       driver.manage.window.resize_to(1280, full_height)
 
+      puts "save"
+      puts "#{@file_name}"
       driver.save_screenshot("storage/#{@file_name}")
       driver.quit
     end
