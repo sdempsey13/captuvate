@@ -8,7 +8,6 @@ class SnapShotJob < ApplicationJob
     def perform(domain)
       create_snap_shot(domain)
       set_file_name(domain)
-      binding.pry
       take_screen_shot(domain)
       attach_img_to_snap_shot
     end
