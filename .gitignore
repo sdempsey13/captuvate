@@ -35,3 +35,5 @@
 
 # Ignore asset builds
 /app/assets/builds/*
+
+.DS_Store
