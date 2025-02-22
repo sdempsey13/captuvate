@@ -11,9 +11,11 @@ class SnapShotJob < ApplicationJob
       take_snap_shot(domain)
       attach_img_to_snap_shot
     rescue => e
+      Rails.logger.error("Error during snapshot creation: #{e.message}")
+      Rails.logger.error("Backtrace: #{e.backtrace.join("\n")}")
       puts 'error during snap shot creation'
       puts e.message
-      puts e.backlog
+      puts e.backtrace.join("\n")
     end
 
     private
