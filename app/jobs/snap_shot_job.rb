@@ -41,7 +41,12 @@ class SnapShotJob < ApplicationJob
       options.add_argument("--window-size=1280x1024")
 
       puts "driver"
-      driver = Selenium::WebDriver.for :chrome, options: options
+      begin
+        driver = Selenium::WebDriver.for :chrome, options: options
+      rescue StandardError => e
+        puts "Error creating Selenium WebDriver: #{e.message}"
+        puts e.backtrace
+      end
       
       puts "navigate to"
       driver.navigate.to domain.url
