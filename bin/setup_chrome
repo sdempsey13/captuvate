@@ -10,7 +10,7 @@ mkdir -p bin
 
 # Download Chromium (latest stable version)
 echo "Downloading Chromium..."
-wget -qO chromium.tar.bz2 https://storage.googleapis.com/chrome-for-testing/126.0.6478.126/linux64/chromium-browser-linux64.tar.bz2
+curl -sSL -o chromium.tar.bz2 https://storage.googleapis.com/chrome-for-testing/126.0.6478.126/linux64/chromium-browser-linux64.tar.bz2
 
 # Extract the tar.bz2 file
 echo "Extracting Chromium..."
