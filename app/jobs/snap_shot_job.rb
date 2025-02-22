@@ -6,17 +6,14 @@ class SnapShotJob < ApplicationJob
     attr_accessor :file_name, :snap_shot
 
     def perform(domain)
-      puts "creating snapshot"
       create_snap_shot(domain)
-      puts "setting file name"
       set_file_name(domain)
-      puts "taking screen shot"
       take_snap_shot(domain)
-      puts "attaching image to snap shot"
       attach_img_to_snap_shot
-    rescue StandardError => e
-      puts "Error creating Selenium WebDriver: #{e.message}"
-      puts e.backtrace
+    rescue => e
+      puts 'error during snap shot creation'
+      puts e.message
+      puts e.backlog
     end
 
     private
@@ -32,7 +29,6 @@ class SnapShotJob < ApplicationJob
     end
 
     def take_snap_shot(domain)
-      puts "options"
       options = Selenium::WebDriver::Chrome::Options.new
       options.add_argument("--headless")
       options.add_argument("--no-sandbox")
@@ -40,24 +36,13 @@ class SnapShotJob < ApplicationJob
       options.add_argument("--disable-gpu")
       options.add_argument("--window-size=1280x1024")
 
-      puts "driver"
-      begin
-        driver = Selenium::WebDriver.for :chrome, options: options
-      rescue StandardError => e
-        puts "Error creating Selenium WebDriver: #{e.message}"
-        puts e.backtrace
-      end
-      
-      puts "navigate to"
+      driver = Selenium::WebDriver.for :chrome, options: options
       driver.navigate.to domain.url
 
       full_height = driver.execute_script("return document.body.scrollHeight")
 
-      puts "resize"
       driver.manage.window.resize_to(1280, full_height)
 
-      puts "save"
-      puts "#{@file_name}"
       driver.save_screenshot("storage/#{@file_name}")
       driver.quit
     end
