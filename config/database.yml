@@ -84,7 +84,7 @@ production:
     <<: *primary_production
     database: captuvate_production_cable
     migrations_paths: db/cable_migrate
-  # cache:
-  #   <<: *primary_production
-  #   database: captuvate_production_cache
-  #   migrations_paths: db/cache_migrate
+  cache:
+    <<: *primary_production
+    database: captuvate_production_cache
+    migrations_paths: db/cache_migrate
