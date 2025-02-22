@@ -6,9 +6,13 @@ class SnapShotJob < ApplicationJob
     attr_accessor :file_name, :snap_shot
 
     def perform(domain)
+      puts "creating snapshot"
       create_snap_shot(domain)
+      puts "setting file name"
       set_file_name(domain)
+      puts "taking screen shot"
       take_snap_shot(domain)
+      puts "attaching image to snap shot"
       attach_img_to_snap_shot
     end
 
