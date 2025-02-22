@@ -14,6 +14,9 @@ class SnapShotJob < ApplicationJob
       take_snap_shot(domain)
       puts "attaching image to snap shot"
       attach_img_to_snap_shot
+
+    rescue => e
+      puts "#{e}"
     end
 
     private
