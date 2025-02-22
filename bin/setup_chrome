@@ -1,0 +1,23 @@
+
+#!/bin/bash
+set -e
+
+# Define the directory to store Chrome
+CHROME_DIR="bin/chrome-linux"
+
+# Make sure the bin directory exists
+mkdir -p bin
+
+# Download Chromium (latest stable version)
+echo "Downloading Chromium..."
+wget -qO- https://storage.googleapis.com/chrome-for-testing-public/126.0.6478.126/linux64/chrome-linux64.zip | funzip > chrome-linux64.zip
+
+# Extract and move to bin directory
+unzip -q chrome-linux64.zip -d bin/
+mv bin/chrome-linux64 "$CHROME_DIR"
+rm chrome-linux64.zip
+
+# Make it executable
+chmod +x "$CHROME_DIR/chrome"
+
+echo "Chromium installed successfully."

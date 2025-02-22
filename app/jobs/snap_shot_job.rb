@@ -25,7 +25,12 @@ class SnapShotJob < ApplicationJob
     end
 
     def take_screen_shot(domain)
-      browser = Ferrum::Browser.new(headless: true, browser_options: { "no-sandbox" => nil })
+      browser = Ferrum::Browser.new(
+        headless: true,
+        browser_options: { "no-sandbox" => nil },
+        browser_path: Rails.root.join("bin/chrome-linux/chrome").to_s
+      )
+
       browser.go_to(domain.url)
   
       browser.network.wait_for_idle
