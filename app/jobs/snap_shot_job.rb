@@ -10,6 +10,7 @@ class SnapShotJob < ApplicationJob
       set_file_name(domain)
       take_screen_shot(domain)
       attach_img_to_snap_shot
+      puts 'finished screenshot job'
     end
 
     private
@@ -25,28 +26,28 @@ class SnapShotJob < ApplicationJob
     end
 
     def take_screen_shot(domain)
-      browser = Ferrum::Browser.new(
-        headless: true,
-        browser_options: { "no-sandbox" => nil },
-        browser_path: Rails.root.join("bin/chrome-linux/chrome").to_s
-      )
+      # browser = Ferrum::Browser.new(
+      #   headless: true,
+      #   browser_options: { "no-sandbox" => nil },
+      #   browser_path: Rails.root.join("bin/chrome-linux/chrome").to_s
+      # )
 
-      browser.go_to(domain.url)
+      # browser.go_to(domain.url)
   
-      browser.network.wait_for_idle
+      # browser.network.wait_for_idle
   
-      browser.screenshot(path: "storage/#{@file_name}", full: true)
-      browser.quit
+      # browser.screenshot(path: "storage/#{@file_name}", full: true)
+      # browser.quit
     end
 
     def attach_img_to_snap_shot
-      file_path = Rails.root.join('storage', "#{@file_name}")
+      # file_path = Rails.root.join('storage', "#{@file_name}")
 
-      @snap_shot.screen_shot.attach(
-        io: File.open(file_path),
-        filename: File.basename(file_path),
-        content_type: 'image/png'
-      )
+      # @snap_shot.screen_shot.attach(
+      #   io: File.open(file_path),
+      #   filename: File.basename(file_path),
+      #   content_type: 'image/png'
+      # )
     end
   end
   
