@@ -23,6 +23,7 @@ gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'bootstrap', '~> 5.3.3'
 gem 'dartsass-rails', '~> 0.5.1'
 
+gem 'httparty', '~> 0.22.0'
 gem 'ferrum', '~> 0.16'
 gem "image_processing", "~> 1.2"
 gem 'mini_magick', '~> 5.1', '>= 5.1.2'
