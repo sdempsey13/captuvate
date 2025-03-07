@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_10_191155) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_07_043450) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -42,6 +42,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_10_191155) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "domain_schedules", force: :cascade do |t|
+    t.bigint "domain_id", null: false
+    t.integer "frequency", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["domain_id"], name: "index_domain_schedules_on_domain_id"
+    t.index ["frequency"], name: "index_domain_schedules_on_frequency"
+  end
+
   create_table "domains", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -71,6 +80,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_10_191155) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "domain_schedules", "domains"
   add_foreign_key "domains", "users"
   add_foreign_key "snap_shots", "domains"
 end

@@ -3,6 +3,8 @@ class Domain < ApplicationRecord
 
   has_many :snap_shots, dependent: :destroy
 
+  has_one :domain_schedule, dependent: :destroy
+
   validates :url, presence: true
 
   after_create :setup_snapshots
