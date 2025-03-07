@@ -25,6 +25,8 @@ gem 'dartsass-rails', '~> 0.5.1'
 
 gem 'httparty', '~> 0.22.0'
 gem 'ferrum', '~> 0.16'
+
+gem 'aws-sdk-s3', '~> 1.182'
 gem "image_processing", "~> 1.2"
 gem 'mini_magick', '~> 5.1', '>= 5.1.2'
 
