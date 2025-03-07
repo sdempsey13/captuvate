@@ -14,7 +14,9 @@
       <% @domains.each do |domain| %>
         <div class="col-md-4 pb-5">
           <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
+            <% if domain.snap_shots.last.screen_shot.present? %>
+              <%= image_tag domain.snap_shots.last.screen_shot, class: "card-img-top" %>
+            <% end %>
             <div class="card-body">
               <%= link_to "#{domain.url}", domain_path(domain), class: "" %>
             </div>

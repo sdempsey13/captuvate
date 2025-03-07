@@ -14,8 +14,8 @@
       <div class="col-md-4 pb-5">
         <% @domain.snap_shots.each do |snap_shot| %>
           <div class="card">
-            <% if snap_shot.screen_shot.variant(:thumb).present? %>
-              <%= image_tag snap_shot.screen_shot.variant(:thumb) %>
+            <% if snap_shot.screen_shot.present? %>
+              <%= image_tag snap_shot.screen_shot %>
             <% end %>
             <div class="card-body">
             <%= link_to "This Snap Shot", snap_shots_path(snap_shot), class: "" %>
