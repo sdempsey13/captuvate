@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_07_043450) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_10_020633) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -47,6 +47,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_07_043450) do
     t.integer "frequency", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "active", default: true, null: false
+    t.index ["active"], name: "index_domain_schedules_on_active"
     t.index ["domain_id"], name: "index_domain_schedules_on_domain_id"
     t.index ["frequency"], name: "index_domain_schedules_on_frequency"
   end

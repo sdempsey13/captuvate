@@ -20,8 +20,8 @@ class SnapShotJob < ApplicationJob
     token = Rails.application.credentials.dig(:screen_shot_api, :private_key)
     url = CGI.escape(domain.url)
     
-    query = "https://shot.screenshotapi.net/v3/screenshot"
-    query += "?token=#{token}&url=#{url}&output=json&file_type=png&fresh=true"
+    query = "https://shot.screenshotapi.net/v3/screenshot?"
+    query += set_screenshot_options(token, url).to_query
     
     response = Net::HTTP.get_response(URI.parse(query))
     result = JSON.parse(response.body)
@@ -40,5 +40,25 @@ class SnapShotJob < ApplicationJob
       filename: "#{@snap_shot.id}.png",
       content_type: 'image/png'
     )
+  end
+
+  def set_screenshot_options(token, url)
+    {
+      token: token,
+      url: url,
+      output: 'json',
+      file_type: 'png',
+      width: 1920,
+      height: 1080,
+      full_page: true,
+      fresh: true,
+      # wait_for_page_load: true,
+      # delay: 3, # Wait 3 seconds after page load
+      # retina: true,
+      accept_language: 'en-US,en;q=0.8',
+      no_cookie_banners: true,
+      lazy_load: true,
+      # remove_selectors: '.modal, .popup, .cookie-banner, .newsletter-popup, #gdpr-consent, .intercom-lightweight-app' # Close common pop-ups
+    }
   end
 end
