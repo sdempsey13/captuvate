@@ -15,3 +15,10 @@ production:
     queue: default
     args: [ 'minutely' ]
     schedule: every minute
+
+development:
+  minutely_snap_shot:
+    class: SnapShotOrchestratorJob
+    queue: default
+    args: [ 'minutely' ]
+    schedule: every minute

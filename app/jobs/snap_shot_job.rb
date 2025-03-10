@@ -4,9 +4,13 @@ class SnapShotJob < ApplicationJob
   queue_as :default
 
   def perform(domain)
+    puts "start snap shot job for domain #: #{domain.id}"
     create_snap_shot(domain)
+    puts 'created snap shot'
     screenshot_url = fetch_screen_shot_url(domain)
+    puts 'received screenshot url'
     attach_img_to_snap_shot(screenshot_url) if screenshot_url
+    puts 'attached image to snap shot'
     puts 'finished screenshot job'
   end
 

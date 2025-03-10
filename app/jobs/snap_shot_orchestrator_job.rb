@@ -2,19 +2,22 @@ class SnapShotOrchestratorJob < ApplicationJob
   queue_as :default
 
   def perform(schedule)
-    puts 'snap shot orchestrator'
-    # collect_domains(schedule)
-    # queue_snap_shot_jobs
-    # puts 'finished snap shot orchestrator job'
+    puts 'start snap shot orchestrator'
+    domains = collect_domains(schedule)
+    puts "#{domains.count}"
+    queue_snap_shot_jobs(domains)
+    puts 'finish snap shot orchestrator job'
   end
 
   private
 
   def collect_domains(schedule)
-    DomainSchedule.active.by_frequency(schedule)
+    DomainSchedule.active.by_frequency(schedule.to_sym)
   end
 
-  def queue_snap_shot_jobs
-    SnapShotJob.perform_later()
+  def queue_snap_shot_jobs(domains)
+    domains.each do |domain|
+      SnapShotJob.perform_now(domain)
+    end
   end
 end
