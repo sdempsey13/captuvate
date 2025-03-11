@@ -10,11 +10,11 @@
 #     schedule: at 5am every day
 
 production:
-  minutely_snap_shot:
+  hourly_snap_shot:
     class: SnapShotOrchestratorJob
     queue: default
-    args: [ 'minutely' ]
-    schedule: every minute
+    args: [ 'hourly' ]
+    schedule: every hour
 
 development:
   minutely_snap_shot:
