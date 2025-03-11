@@ -12,7 +12,9 @@ class SnapShotOrchestratorJob < ApplicationJob
   private
 
   def collect_domains(schedule)
-    DomainSchedule.active.by_frequency(schedule.to_sym)
+    Domain.joins(:domain_schedule)
+      .merge(DomainSchedule.active.by_frequency(schedule))
+      .distinct
   end
 
   def queue_snap_shot_jobs(domains)

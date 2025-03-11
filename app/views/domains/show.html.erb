@@ -18,7 +18,7 @@
               <%= image_tag snap_shot.screen_shot %>
             <% end %>
             <div class="card-body">
-            <%= link_to "This Snap Shot", snap_shots_path(snap_shot), class: "" %>
+            <%= link_to "#{snap_shot.created_at.to_date}, #{snap_shot.created_at.strftime("%I:%M")}", snap_shots_path(snap_shot), class: "" %>
             </div>
           </div>  
         <% end %>
