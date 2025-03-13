@@ -15,7 +15,9 @@
         <% @domain.snap_shots.each do |snap_shot| %>
           <div class="card">
             <% if snap_shot.screen_shot.present? %>
-              <%= image_tag snap_shot.screen_shot %>
+              <div class: "capture-image-container h-100">
+                <%= image_tag snap_shot.screen_shot, class: "card-img-top capture-image" %>
+              </div>
             <% end %>
             <div class="card-body">
             <%= link_to "#{snap_shot.created_at.to_date}, #{snap_shot.created_at.strftime("%I:%M%p").downcase}", snap_shots_path(snap_shot), class: "" %>
