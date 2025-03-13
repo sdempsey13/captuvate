@@ -15,7 +15,9 @@
         <div class="col-md-4 pb-5">
           <div class="card" style="width: 18rem;">
             <% if domain.snap_shots.last.screen_shot.present? %>
-              <%= image_tag domain.snap_shots.last.screen_shot, class: "card-img-top" %>
+              <div class: "capture-image-container h-100">
+                <%= image_tag domain.snap_shots.last.screen_shot, class: "card-img-top capture-image" %>
+              </div>
             <% end %>
             <div class="card-body">
               <%= link_to "#{domain.url}", domain_path(domain), class: "" %>
