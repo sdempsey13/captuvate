@@ -1,7 +1,7 @@
 class DomainSchedule < ApplicationRecord
   belongs_to :domain
   
-  enum :frequency, { minutely: 0, hourly: 1, daily: 2, weekly: 3, monthly: 4 }
+  enum :frequency, { daily: 0, weekly: 1, monthly: 2 }
 
   scope :active, -> { where(active: true) }
   scope :by_frequency, ->(freq) { where(frequency: freq) }

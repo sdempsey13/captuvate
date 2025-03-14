@@ -4,6 +4,7 @@ class Domain < ApplicationRecord
   has_many :snap_shots, dependent: :destroy
 
   has_one :domain_schedule, dependent: :destroy
+  accepts_nested_attributes_for :domain_schedule
 
   validates :url, presence: true
 

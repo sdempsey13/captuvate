@@ -1,8 +1,9 @@
-<%= form_with(model: domain) do |form| %>
+<%= form_with(model: domain, class: "needs-validation") do |form| %>
   <% if domain.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(domain``.errors.count, "error") %> prohibited this domain from being saved:</h2>
-
+    <div class="alert alert-danger">
+      <h4 class="alert-heading">
+        <%= pluralize(domain.errors.count, "error") %> prohibited this domain from being saved:
+      </h4>
       <ul>
         <% domain.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,16 +12,32 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.hidden_field :user_id, value: current_user.id %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <div class="mb-3">
+    <%= form.label :url, class: "form-label" %>
+    <%= form.text_field :url, class: "form-control", placeholder: "Enter domain URL" %>
   </div>
 
-  <div>
-    <%= form.label :url, style: "display: block" %>
-    <%= form.text_field :url %>
-  </div>
+  <fieldset class="mb-3">
+    <legend>Schedule Frequency</legend>
+    <%= form.fields_for :domain_schedule do |schedule_form| %>
+      <div class="form-check">
+        <%= schedule_form.radio_button :frequency, :daily, class: "form-check-input", id: "schedule_daily" %>
+        <%= schedule_form.label :frequency_daily, "Daily", class: "form-check-label" %>
+      </div>
+      <div class="form-check">
+        <%= schedule_form.radio_button :frequency, :weekly, class: "form-check-input", id: "schedule_weekly" %>
+        <%= schedule_form.label :frequency_weekly, "Weekly", class: "form-check-label" %>
+      </div>
+      <div class="form-check">
+        <%= schedule_form.radio_button :frequency, :monthly, class: "form-check-input", id: "schedule_monthly" %>
+        <%= schedule_form.label :frequency_monthly, "Monthly", class: "form-check-label" %>
+      </div>
+    <% end %>
+  </fieldset>
 
-  <div>
-    <%= form.submit %>
+  <div class="d-grid">
+    <%= form.submit "Create Domain", class: "btn btn-primary" %>
   </div>
 <% end %>

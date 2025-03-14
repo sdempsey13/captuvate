@@ -13,6 +13,7 @@ class DomainsController < ApplicationController
 
   def new
     @domain = Domain.new
+    @domain.build_domain_schedule
   end
 
   def edit
@@ -59,6 +60,6 @@ class DomainsController < ApplicationController
   end
 
   def domain_params
-    params.expect(domain: [ :user_id, :url ])
+    params.expect(domain: [ :user_id, :url, domain_schedule_attributes: [:frequency] ])
   end
 end
