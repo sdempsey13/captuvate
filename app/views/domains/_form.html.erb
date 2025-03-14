@@ -38,6 +38,6 @@
   </fieldset>
 
   <div class="d-grid">
-    <%= form.submit "Create Domain", class: "btn btn-primary" %>
+    <%= form.submit domain.persisted? ? "Update Domain" : "Create Domain", class: "btn btn-primary" %>
   </div>
 <% end %>
