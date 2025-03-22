@@ -6,26 +6,33 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <h1 class="h2"><%= @domain.url %></h1>
       <div class="btn-toolbar mb-2 mb-md-0">
-        <%= button_to '+ Edit Domain', edit_domain_path, method: :get, class: 'btn btn-secondary' %>
+        <%= button_to 'Edit/Deactivate', edit_domain_path, method: :get, class: 'btn btn-secondary' %>
       </div>
     </div>
     
-    <div class="row">
-      <div class="col-md-4 pb-5">
-        <% @domain.snap_shots.each do |snap_shot| %>
-          <div class="card">
-            <% if snap_shot.screen_shot.present? %>
-              <div class: "capture-image-container h-100">
-                <%= image_tag snap_shot.screen_shot, class: "card-img-top capture-image" %>
+
+        <% @domain.snap_shots.order(created_at: :desc).each do |snap_shot| %>
+          <div class="row">
+            <div class="col-md-12 pb-3">
+              <div class="card p-2">
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <% if snap_shot.screen_shot.present? %>
+                      <div class="capture-image-container h-100">
+                        <%= link_to image_tag(snap_shot.screen_shot, class: "card-img-top capture-image"), snap_shots_path(snap_shot) %>
+                      </div>
+                    <% end %>                  
+                  </div>
+                  <div class="col-md-4">
+                    <p><%= fa_icon "calendar-days" %> Captured: <%= "#{snap_shot.created_at.strftime("%B %d, %Y %I:%M%p")}" %> </p>
+                  </div>          
+                </div>
               </div>
-            <% end %>
-            <div class="card-body">
-            <%= link_to "#{snap_shot.created_at.to_date}, #{snap_shot.created_at.strftime("%I:%M%p").downcase}", snap_shots_path(snap_shot), class: "" %>
             </div>
-          </div>  
+          </div>
         <% end %>
-      </div>
-    </div>
+
     
     <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
   </main>

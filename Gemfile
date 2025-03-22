@@ -22,6 +22,8 @@ gem 'devise', '~> 4.9', '>= 4.9.4'
 
 gem 'bootstrap', '~> 5.3.3'
 gem 'dartsass-rails', '~> 0.5.1'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.9'
+gem 'font-awesome-sass', '~> 6.7', '>= 6.7.2'
 
 gem 'httparty', '~> 0.22.0'
 gem 'ferrum', '~> 0.16'
