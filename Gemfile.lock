@@ -149,10 +149,6 @@ GEM
     ffi (1.17.1-x86_64-darwin)
     ffi (1.17.1-x86_64-linux-gnu)
     ffi (1.17.1-x86_64-linux-musl)
-    font-awesome-rails (4.7.0.9)
-      railties (>= 3.2, < 9.0)
-    font-awesome-sass (6.7.2)
-      sassc (~> 2.0)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -380,8 +376,6 @@ GEM
       google-protobuf (~> 4.29)
     sass-embedded (1.83.4-x86_64-linux-musl)
       google-protobuf (~> 4.29)
-    sassc (2.4.0)
-      ffi (~> 1.9)
     securerandom (0.4.1)
     solid_cable (3.0.7)
       actioncable (>= 7.2)
@@ -460,8 +454,6 @@ DEPENDENCIES
   debug
   devise (~> 4.9, >= 4.9.4)
   ferrum (~> 0.16)
-  font-awesome-rails (~> 4.7, >= 4.7.0.9)
-  font-awesome-sass (~> 6.7, >= 6.7.2)
   httparty (~> 0.22.0)
   image_processing (~> 1.2)
   importmap-rails
