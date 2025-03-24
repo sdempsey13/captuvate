@@ -11,21 +11,26 @@
         Settings/Edit
       </div>
     </div>
-    
+
     <div class="row">
       <div class="col-md-8 pb-5">
         <div class="card" style="width: 100%;">
           <%= image_tag @snap_shot.screen_shot %>
-          <div class="card-body">
-            Card body text Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate esse in repellat quam sit aliquam facere ullam voluptas alias eius vero quos molestiae eveniet expedita, nam vitae sunt voluptatibus obcaecati!
-          </div>
         </div>  
       </div>
-      
-      <div class="col-md-4">
-        <p>text/do we want a sidebar here?</p>
-      </div>
 
+      <div class="col-md-4">
+        <div class="card" style="width: 100%;">
+          <%= form_with(model: @snap_shot, url: snap_shots_path, local: true) do |f| %>
+            <div class="mb-3">
+              <%= f.label :content, "Your Comment" %>
+              <%= f.text_area :content, class: "form-control", rows: 3 %>
+            </div>
+            
+            <%= f.submit "Add Comment", class: "btn btn-primary" %>
+          <% end %>
+        </div>  
+      </div>
     </div>
     
     <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>

@@ -13,15 +13,20 @@
     <div class="row">
       <% @domains.each do |domain| %>
         <div class="col-md-4 pb-5">
-          <div class="card" style="width: 18rem;">
+          <div class="card" style: "width: 100%;">
+            <div class="d-flex py-3 px-2">
+              <p class="mb-0 pb-0">
+                <%= icon "globe-alt", style: "width: 2em;" %> <%= "#{domain.url}" %>
+              </p>
+              <p class="ms-auto mb-0">
+                <%= icon "arrow-top-right-on-square", style: "width: 2em;" %>
+              </p>            
+            </div>
             <% if domain.snap_shots.last.screen_shot.present? %>
               <div class: "capture-image-container h-100">
                 <%= image_tag domain.snap_shots.last.screen_shot, class: "card-img-top capture-image" %>
               </div>
             <% end %>
-            <div class="card-body">
-              <%= link_to "#{domain.url}", domain_path(domain), class: "" %>
-            </div>
           </div>  
         </div>
       <% end %>

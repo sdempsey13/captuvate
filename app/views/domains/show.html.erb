@@ -9,31 +9,27 @@
         <%= button_to 'Edit/Deactivate', edit_domain_path, method: :get, class: 'btn btn-secondary' %>
       </div>
     </div>
-    
+    <% @domain.snap_shots.order(created_at: :desc).each do |snap_shot| %>
+      <div class="row">
+        <div class="col-md-12 pb-3">
+          <div class="card p-2">
 
-        <% @domain.snap_shots.order(created_at: :desc).each do |snap_shot| %>
-          <div class="row">
-            <div class="col-md-12 pb-3">
-              <div class="card p-2">
-
-                <div class="row">
-                  <div class="col-md-4">
-                    <% if snap_shot.screen_shot.present? %>
-                      <div class="capture-image-container h-100">
-                        <%= link_to image_tag(snap_shot.screen_shot, class: "card-img-top capture-image"), snap_shots_path(snap_shot) %>
-                      </div>
-                    <% end %>                  
+            <div class="row">
+              <div class="col-md-4">
+                <% if snap_shot.screen_shot.present? %>
+                  <div class="capture-image-container h-100">
+                    <%= link_to image_tag(snap_shot.screen_shot, class: "card-img-top capture-image"), snap_shots_path(snap_shot) %>
                   </div>
-                  <div class="col-md-4">
-                    <p><%= icon "calendar-days", style: "width: 2em;" %> Captured: <%= "#{snap_shot.created_at.strftime("%B %d, %Y %I:%M%p")}" %> </p>
-                  </div>          
-                </div>
+                <% end %>                  
               </div>
+              <div class="col-md-4">
+                <p><%= icon "calendar-days", style: "width: 2em;" %> Captured: <%= "#{snap_shot.created_at.strftime("%B %d, %Y at %I:%M%P")}" %> </p>
+              </div>          
             </div>
           </div>
-        <% end %>
-
-    
+        </div>
+      </div>
+    <% end %>
     <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
   </main>
 </div>
