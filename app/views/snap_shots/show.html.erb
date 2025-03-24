@@ -4,11 +4,13 @@
   
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2">
-        Header
-      </h1>
-      <div class="btn-toolbar mb-2 mb-md-0">
-        Settings/Edit
+      <div class="d-flex">
+        <%= link_to domain_path(@snap_shot.domain), class: "text-decoration-none", style: "all: unset; cursor: pointer;" do %>
+          <%= icon "arrow-left-end-on-rectangle", style: "width: 2em;", class: "me-2" %>
+        <% end %>
+        <div class="h4 ms-auto">
+          Capture taken: <%= "#{@snap_shot.created_at.strftime("%B %d, %Y at %I:%M%P")}" %>
+        </div>
       </div>
     </div>
 

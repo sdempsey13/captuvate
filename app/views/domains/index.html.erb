@@ -4,7 +4,7 @@
 
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2">Domains</h1>
+      <div class="h2">Domains</div>
       <div class="btn-toolbar mb-2 mb-md-0">
         <%= button_to '+ Add Domain', new_domain_path, method: :get, class: 'btn btn-secondary' %>
       </div>
@@ -13,21 +13,23 @@
     <div class="row">
       <% @domains.each do |domain| %>
         <div class="col-md-4 pb-5">
-          <div class="card" style: "width: 100%;">
-            <div class="d-flex py-3 px-2">
-              <p class="mb-0 pb-0">
-                <%= icon "globe-alt", style: "width: 2em;" %> <%= "#{domain.url}" %>
-              </p>
-              <p class="ms-auto mb-0">
-                <%= icon "arrow-top-right-on-square", style: "width: 2em;" %>
-              </p>            
-            </div>
-            <% if domain.snap_shots.last.screen_shot.present? %>
-              <div class: "capture-image-container h-100">
-                <%= image_tag domain.snap_shots.last.screen_shot, class: "card-img-top capture-image" %>
+          <%= link_to domain_path(domain), class: "text-decoration-none" do %>
+            <div class="card" style: "width: 100%;">
+              <div class="d-flex py-3 px-2">
+                <p class="mb-0 pb-0">
+                  <%= icon "arrow-left-end-on-rectangle", style: "width: 2em;" %> <%= "#{domain.url}" %>
+                </p>
+                <p class="ms-auto mb-0">
+                  <%= icon "arrow-top-right-on-square", style: "width: 2em;" %>
+                </p>            
               </div>
-            <% end %>
-          </div>  
+              <% if domain.snap_shots.last.screen_shot.present? %>
+                <div class: "capture-image-container h-100">
+                  <%= image_tag domain.snap_shots.last.screen_shot, class: "card-img-top capture-image" %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
