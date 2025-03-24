@@ -6,7 +6,7 @@ class Domain < ApplicationRecord
   has_one :domain_schedule, dependent: :destroy
   accepts_nested_attributes_for :domain_schedule
 
-  validates :url, presence: true
+  validates :url, presence: true, uniqueness: { scope: :user_id, message: "must be unique" }
 
   after_create :setup_snapshots
 

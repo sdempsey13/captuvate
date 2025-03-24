@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :domains
 
   get "snap_shots/:id", to: "snap_shots#show", as: :snap_shots
+  post "snap_shots/create/:id", to: "snap_shots#create", as: :take_snap_shot
 
   get "up" => "rails/health#show", as: :rails_health_check
 

@@ -7,6 +7,10 @@ class SnapShotsController < ApplicationController
     @snap_shots = current_user.snap_shots
   end
 
+  def create
+    SnapShotJob.perform_later(Domain.find(params[:id]))
+  end
+
   private
   def set_snap_shot
     @snap_shot = SnapShot.find(params.expect(:id))
