@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <%= favicon_link_tag asset_path('logo_transparent.ico'), rel: 'icon', type: 'image/x-icon' %>
     <title><%= content_for(:title) || "Captuvate" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -20,9 +21,10 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <div class="container-fluid">
       <% if user_signed_in? %>
         <%= render "navbar_user" %>
@@ -36,5 +38,9 @@
       
       <%= yield %>
     </div>
+
+    <footer class="bg-light text-center py-3 mt-auto">
+      © <%= Time.now.year %> Captuvate. All rights reserved.
+    </footer>
   </body>
 </html>
