@@ -12,6 +12,13 @@
           Capture taken: <%= "#{@snap_shot.created_at.strftime("%B %d, %Y at %I:%M%P")}" %>
         </div>
       </div>
+
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Display Full Screen
+        </button>
+      </div>
+
     </div>
 
     <div class="row">
@@ -22,19 +29,31 @@
       </div>
 
       <div class="col-md-4">
-        <div class="card" style="width: 100%;">
+        <div class="card sticky-top" style="width: 100%;">
           <%= form_with(model: @snap_shot, url: snap_shots_path, local: true) do |f| %>
             <div class="mb-3">
               <%= f.label :content, "Your Comment" %>
               <%= f.text_area :content, class: "form-control", rows: 3 %>
             </div>
-            
             <%= f.submit "Add Comment", class: "btn btn-primary" %>
           <% end %>
-        </div>  
+        </div>
       </div>
     </div>
     
     <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
   </main>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= image_tag @snap_shot.screen_shot, class: "img-fluid" %>
+      </div>
+    </div>
+  </div>
 </div>
