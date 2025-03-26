@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   post "domain_schedules/set_activation/:id", to: "domain_schedules#set_activation", as: :set_domain_schedule_activation
 
+  post "comments", to: "comments#create"
+
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)

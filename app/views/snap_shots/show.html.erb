@@ -29,15 +29,24 @@
       </div>
 
       <div class="col-md-4">
-        <div class="card sticky-top" style="width: 100%;">
-          <%= form_with(model: @snap_shot, url: snap_shots_path, local: true) do |f| %>
+        <div class="card sticky-top mb-2" style="width: 100%;">
+          <%= form_with(url: comments_path, local: true) do |f| %>
             <div class="mb-3">
               <%= f.label :content, "Your Comment" %>
               <%= f.text_area :content, class: "form-control", rows: 3 %>
             </div>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.hidden_field :snap_shot_id, value: @snap_shot.id %>
             <%= f.submit "Add Comment", class: "btn btn-primary" %>
           <% end %>
         </div>
+        <% @comments.each do |comment| %>
+          <div class="card mb-2">
+            <div class="card-body">
+              <%= comment.content %>
+            </div>
+          </div>
+        <% end %> 
       </div>
     </div>
     

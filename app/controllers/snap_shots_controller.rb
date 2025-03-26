@@ -4,7 +4,7 @@ class SnapShotsController < ApplicationController
 
   def show
     @domains = current_user.domains
-    @snap_shots = current_user.snap_shots
+    @comments = @snap_shot.comments.reverse_order
   end
 
   def create
