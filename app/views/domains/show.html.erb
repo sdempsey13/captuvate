@@ -40,11 +40,13 @@
                 <p><%= icon "calendar-days", style: "width: 2em;" %> Captured: <%= "#{snap_shot.created_at.strftime("%B %d, %Y at %I:%M%P")}" %> </p>
               </div>
               <div class="col-md-4">
-                <div class="card mb-2">
-                  <div class="card-body">
-                    <%= snap_shot.comments.last.content %>
+                <% if snap_shot.comments.last %>
+                  <div class="card mb-2">
+                    <div class="card-body">
+                      <%= snap_shot.comments.last.content %>
+                    </div>
                   </div>
-                </div>
+                <% end %>
               </div>          
             </div>
           </div>
