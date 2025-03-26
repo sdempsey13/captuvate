@@ -19,6 +19,11 @@
     <%= form.text_field :url, class: "form-control", placeholder: "Enter domain URL" %>
   </div>
 
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "Enter a recognizable name for your domain" %>
+  </div>
+
   <fieldset class="mb-3">
     <legend>Schedule Frequency</legend>
     <%= form.fields_for :domain_schedule do |schedule_form| %>

@@ -1,11 +1,11 @@
 <div class="border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
   <ul>
-    <li>
+    <li class="mb-1" >
       <%= link_to "All of my Domains", domains_path %>
     </li>
     <% @domains.each do |domain| %>
-      <li>
-        <%= link_to "#{domain.url}", domain_path(domain), class: "" %>
+      <li class="mb-1" >
+        <%= link_to "#{domain_idntifier(domain)}", domain_path(domain), class: "" %>
       </li>
     <% end %>
   </ul>  

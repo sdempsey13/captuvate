@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :domains, dependent: :destroy
   has_many :snap_shots, through: :domains
+  has_many :comments, dependent: :destroy
 end

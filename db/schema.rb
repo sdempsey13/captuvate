@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_26_185416) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_26_200236) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -40,6 +40,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_185416) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "snap_shot_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["snap_shot_id"], name: "index_comments_on_snap_shot_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "domain_schedules", force: :cascade do |t|
@@ -83,6 +93,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_185416) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "snap_shots"
+  add_foreign_key "comments", "users"
   add_foreign_key "domain_schedules", "domains"
   add_foreign_key "domains", "users"
   add_foreign_key "snap_shots", "domains"
