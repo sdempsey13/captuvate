@@ -16,9 +16,7 @@
           <%= current_user.email %>
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">My Profile</a></li>
-          <li><a class="dropdown-item" href="#">My Groups</a></li>
-          <li><%= button_to "Sign out", destroy_user_session_path, method: :delete %></li>
+          <li><%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "ms-2" %></li>
         </ul>
       </div>
 
