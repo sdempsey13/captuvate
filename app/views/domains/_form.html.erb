@@ -53,10 +53,11 @@
   <hr>
 
   <div class="d-grid mt-3">
-    <%= link_to "Deactivate Domain", 
-      domain_path(@domain), 
-      method: :delete, 
-      class: "btn btn-outline-danger mb-2"
+    <%= button_to "Deactivate Domain", 
+      set_domain_schedule_activation_path(@domain.domain_schedule), 
+      method: :post, 
+      class: "btn btn-outline-danger mb-2",
+      style: "width:100%;" 
     %>
     <%= button_to "Delete Domain", 
       domain_path(@domain), 
