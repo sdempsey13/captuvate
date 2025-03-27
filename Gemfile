@@ -24,7 +24,7 @@ gem 'bootstrap', '~> 5.3.3'
 gem 'dartsass-rails', '~> 0.5.1'
 gem 'rails_icons', '~> 1.2'
 
-gem 'httparty', '~> 0.22.0'
+gem 'httparty', '~> 0.23.0'
 gem 'ferrum', '~> 0.16'
 
 gem 'aws-sdk-s3', '~> 1.182'

@@ -114,7 +114,7 @@ GEM
     concurrent-ruby (1.3.5)
     connection_pool (2.5.0)
     crass (1.0.6)
-    csv (3.3.2)
+    csv (3.3.3)
     dartsass-rails (0.5.1)
       railties (>= 6.0.0)
       sass-embedded (~> 1.63)
@@ -169,7 +169,7 @@ GEM
     google-protobuf (4.29.3-x86_64-linux)
       bigdecimal
       rake (>= 13)
-    httparty (0.22.0)
+    httparty (0.23.0)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -457,7 +457,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9, >= 4.9.4)
   ferrum (~> 0.16)
-  httparty (~> 0.22.0)
+  httparty (~> 0.23.0)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
