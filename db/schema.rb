@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_26_200236) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_22_002031) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -72,6 +72,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_200236) do
     t.index ["user_id"], name: "index_domains_on_user_id"
   end
 
+  create_table "site_roles", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_site_roles_on_user_id"
+  end
+
   create_table "snap_shots", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -97,5 +105,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_200236) do
   add_foreign_key "comments", "users"
   add_foreign_key "domain_schedules", "domains"
   add_foreign_key "domains", "users"
+  add_foreign_key "site_roles", "users"
   add_foreign_key "snap_shots", "domains"
 end
