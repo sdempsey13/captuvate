@@ -30,7 +30,7 @@ gem 'ferrum', '~> 0.16'
 
 gem 'aws-sdk-s3', '~> 1.182'
 gem "image_processing", "~> 1.2"
-gem 'mini_magick', '~> 5.1', '>= 5.1.2'
+gem 'mini_magick', '~> 5.2'
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
