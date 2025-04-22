@@ -16,6 +16,9 @@
           <%= current_user.email %>
         </button>
         <ul class="dropdown-menu">
+          <% if current_user.admin? %>
+            <li><%= button_to "Domain Uploader", new_admin_domain_uploader_path, method: :get, class: "ms-2" %></li>
+          <% end %>
           <li><%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "ms-2" %></li>
         </ul>
       </div>
