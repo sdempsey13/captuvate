@@ -1,1 +1,18 @@
-new
+<h1>Upload a CSV</h1>
+
+<%= form_with url: admin_domain_uploader_path, local: true, multipart: true do |form| %>
+  <div>
+    <%= form.label :csv_file, "Choose CSV File" %><br>
+    <%= form.file_field :csv_file, accept: '.csv' %>
+  </div>
+
+  <div>
+    <%= form.submit "Upload CSV" %>
+  </div>
+<% end %>
+
+<% if flash[:notice] %>
+  <p style="color: green;"><%= flash[:notice] %></p>
+<% elsif flash[:alert] %>
+  <p style="color: red;"><%= flash[:alert] %></p>
+<% end %>
