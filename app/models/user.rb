@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_one  :site_role, dependent: :destroy
+  has_one :site_role, dependent: :destroy
 
   has_many :domains, dependent: :destroy
   has_many :snap_shots, through: :domains
@@ -12,11 +12,19 @@ class User < ApplicationRecord
 
   delegate :role, to: :site_role, allow_nil: true
 
+  after_create :assign_default_site_role
+
   def admin?
     site_role&.admin?
   end
 
   def client?
     site_role&.client?
+  end
+
+  private
+
+  def assign_default_site_role
+    create_site_role!(role: :client)
   end
 end
