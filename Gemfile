@@ -19,6 +19,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 gem 'devise', '~> 4.9', '>= 4.9.4'
+gem 'pundit', '~> 2.5'
 
 gem 'bootstrap', '~> 5.3.3'
 gem 'dartsass-rails', '~> 0.5.1'
