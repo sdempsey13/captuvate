@@ -25,6 +25,8 @@ gem 'bootstrap', '~> 5.3.3'
 gem 'dartsass-rails', '~> 0.5.1'
 gem 'rails_icons', '~> 1.2'
 
+gem 'mailgun-ruby', '~> 1.3', '>= 1.3.5'
+
 gem 'httparty', '~> 0.22.0'
 gem 'ferrum', '~> 0.16'
 
