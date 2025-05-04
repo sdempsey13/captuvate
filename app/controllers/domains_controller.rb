@@ -60,6 +60,6 @@ class DomainsController < ApplicationController
   end
 
   def domain_params
-    params.expect(domain: [ :user_id, :url, :name, domain_schedule_attributes: [:frequency] ])
+    params.expect(domain: [ :user_id, :url, :name, :collects_desktop, :collects_mobile, domain_schedule_attributes: [:frequency] ])
   end
 end
