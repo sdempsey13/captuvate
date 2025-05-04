@@ -1,4 +1,6 @@
 class SnapShot < ApplicationRecord
+  enum :format, { desktop: 0, mobile: 1 }
+  
   belongs_to :domain
 
   has_many :comments, dependent: :destroy
