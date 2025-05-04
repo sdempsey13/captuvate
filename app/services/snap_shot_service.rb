@@ -10,27 +10,31 @@ class SnapShotService
 
   def call
     puts "start snap shot job for domain #: #{@domain.id}"
-    # Get Mobile screenshot
+
     if @domain.collects_mobile
+      puts 'collecting mobile'
       format = 'mobile'
 
       create_snap_shot(format)
+      puts 'mobile snap shot created'
       screenshot_url = fetch_screen_shot_url(format)
+      puts 'recieved mobile url'
       attach_img_to_snap_shot(screenshot_url) if screenshot_url
+      puts 'attached mobile screenshot'
     end
 
     if @domain.collects_desktop
+      puts 'collecting desktop'
+      format = 'desktop'
 
+      create_snap_shot(format)
+      puts 'desktop snap shot created'
+      screenshot_url = fetch_screen_shot_url(format)
+      puts 'received desktop url'
+      attach_img_to_snap_shot(screenshot_url) if screenshot_url
+      puts 'attached desktop screenshot'
     end
 
-    
-    
-    puts 'created snap shot'
-    screenshot_url = fetch_screen_shot_url
-    puts 'received screenshot url'
-    attach_img_to_snap_shot(screenshot_url) if screenshot_url
-    puts 'attached image to snap shot'
-    puts 'finished screenshot job'
   end
 
   private

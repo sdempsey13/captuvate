@@ -49,6 +49,20 @@
 
   </fieldset>
 
+  <fieldset class="mb-3">
+    <legend>Formats</legend>
+
+    <div class="form-check">
+      <%= form.check_box :collects_desktop, class: "form-check-input", checked: domain.collects_desktop, id: "collects_desktop" %>
+      <%= form.label :collects_desktop, "Desktop", class: "form-check-label" %>
+    </div>
+
+    <div class="form-check">
+      <%= form.check_box :collects_mobile, class: "form-check-input", checked: domain.collects_mobile, id: "collects_mobile" %>
+      <%= form.label :collects_mobile, "Mobile", class: "form-check-label" %>
+    </div>
+  </fieldset>
+
   <div class="d-grid mb-3">
     <%= form.submit domain.persisted? ? "Update Domain" : "Create Domain", class: "btn btn-primary" %>
   </div>
