@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_22_002031) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_04_204823) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -69,6 +69,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_22_002031) do
     t.string "url", null: false
     t.bigint "user_id", null: false
     t.string "name"
+    t.boolean "collects_desktop", default: true, null: false
+    t.boolean "collects_mobile", default: true, null: false
     t.index ["user_id"], name: "index_domains_on_user_id"
   end
 
@@ -84,6 +86,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_22_002031) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "domain_id", null: false
+    t.integer "format", default: 0, null: false
     t.index ["domain_id"], name: "index_snap_shots_on_domain_id"
   end
 

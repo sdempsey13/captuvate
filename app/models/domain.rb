@@ -7,15 +7,19 @@ class Domain < ApplicationRecord
   accepts_nested_attributes_for :domain_schedule
 
   validates :url, presence: true, uniqueness: { scope: :user_id, message: "must be unique" }
+  validate :at_least_one_format_selected
 
-  after_create :setup_snapshots
+  after_create :capture_snapshots
 
   private
-  def setup_snapshots
-    # Que the job to setup a new snap_shot
-    SnapShotJob.perform_later(self)
 
-    # set up the recurring schedule for future snapshots
-    # Schedule.new
+  def capture_snapshots
+    SnapShotJob.perform_later(self)
+  end
+
+  def at_least_one_format_selected
+    unless collects_desktop || collects_mobile
+      errors.add(:base, "At least one screenshot format (desktop or mobile) must be selected.")
+    end
   end
 end
