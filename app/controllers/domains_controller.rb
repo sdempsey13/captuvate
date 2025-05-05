@@ -1,14 +1,22 @@
 class DomainsController < ApplicationController
-  before_action :set_domain, only: %i[ show edit update destroy ]
+  before_action :set_domain, only: %i[ show show_desktop show_mobile edit update destroy ]
   before_action :authenticate_user!
+  before_action :set_domains, only: %i[ index show show_desktop show_mobile ]
 
   def index
-    @domains = current_user.domains
   end
 
   def show
+    # TODO: remove this in favor of pundit auth
     @domain = current_user.domains.find(params[:id])
-    @domains = current_user.domains
+  end
+
+  def show_desktop
+    @snap_shots = SnapShot.for_domain_desktop(@domain)
+  end
+
+  def show_mobile
+    @snap_shots = SnapShot.for_domain_mobile(@domain)
   end
 
   def new
@@ -57,6 +65,10 @@ class DomainsController < ApplicationController
   private
   def set_domain
     @domain = Domain.find(params.expect(:id))
+  end
+
+  def set_domains
+    @domains = current_user.domains
   end
 
   def domain_params

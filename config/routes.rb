@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :domains
+  get "domains/:id/desktop", to: "domains#show_desktop", as: :domain_desktop
+  get "domains/:id/mobile", to: "domains#show_mobile", as: :domain_mobile
 
   get "snap_shots/:id", to: "snap_shots#show", as: :snap_shots
   post "snap_shots/create/:id", to: "snap_shots#create", as: :take_snap_shot
