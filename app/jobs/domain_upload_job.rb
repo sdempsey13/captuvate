@@ -12,6 +12,8 @@ class DomainUploadJob < ApplicationJob
           url: row['URL'],
           user_id: user_id,
           name: row['Name'],
+          collects_desktop: row['Desktop'],
+          collects_mobile: row['Mobile'],
           domain_schedule_attributes: {
             frequency: row['Frequency']
           }
