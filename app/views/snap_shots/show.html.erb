@@ -5,7 +5,7 @@
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
       <div class="d-flex">
-        <%= link_to domain_path(@snap_shot.domain), class: "text-decoration-none", style: "all: unset; cursor: pointer;" do %>
+        <%= link_to public_send("domain_#{@snap_shot.format}_path", @snap_shot.domain), class: "text-decoration-none", style: "all: unset; cursor: pointer;" do %>
           <%= icon "arrow-left-end-on-rectangle", style: "width: 2em;", class: "me-2" %>
         <% end %>
         <div class="h4 ms-auto">
