@@ -27,7 +27,7 @@ gem 'rails_icons', '~> 1.2'
 
 gem 'mailgun-ruby', '~> 1.3', '>= 1.3.5'
 
-gem 'httparty', '~> 0.22.0'
+gem 'httparty', '~> 0.23.1'
 gem 'ferrum', '~> 0.16'
 
 gem 'aws-sdk-s3', '~> 1.182'
