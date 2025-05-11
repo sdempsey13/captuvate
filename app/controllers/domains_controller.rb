@@ -32,7 +32,7 @@ class DomainsController < ApplicationController
 
     respond_to do |format|
       if @domain.save
-        format.html { redirect_to @domain, notice: "Domain was successfully created." }
+        format.html { redirect_to domain_path_generator(@domain), notice: "Domain was successfully created." }
         format.json { render :show, status: :created, location: @domain }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -44,7 +44,7 @@ class DomainsController < ApplicationController
   def update
     respond_to do |format|
       if @domain.update(domain_params)
-        format.html { redirect_to @domain, notice: "Domain was successfully updated." }
+        format.html { redirect_to domain_path_generator(@domain), notice: "Domain was successfully updated." }
         format.json { render :show, status: :ok, location: @domain }
       else
         format.html { render :edit, status: :unprocessable_entity }
