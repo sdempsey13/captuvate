@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include PathUtils
+
   def flash_message(type)
     return unless flash[type].present?
     

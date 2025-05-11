@@ -23,7 +23,7 @@
                   <%= icon "arrow-top-right-on-square", style: "width: 2em;" %>
                 </p>            
               </div>
-              <% if domain.snap_shots.last.screen_shot.present? %>
+              <% if domain.snap_shots.last&.screen_shot.present? %>
                 <div class: "capture-image-container h-100">
                   <%= image_tag domain.snap_shots.last.screen_shot, class: "card-img-top capture-image" %>
                 </div>
