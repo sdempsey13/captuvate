@@ -17,10 +17,12 @@ class SnapShotService
 
       create_snap_shot(format)
       puts 'mobile snap shot created'
-      screenshot_url = fetch_screen_shot_url(format)
+      result = fetch_response(format)
       puts 'recieved mobile url'
-      attach_img_to_snap_shot(screenshot_url) if screenshot_url
+      attach_img_to_snap_shot(result) if result['screenshot']
       puts 'attached mobile screenshot'
+      attach_html_to_snap_shot(result) if result['extracted_html']
+      puts 'attached html'
     end
 
     if @domain.collects_desktop
@@ -29,10 +31,12 @@ class SnapShotService
 
       create_snap_shot(format)
       puts 'desktop snap shot created'
-      screenshot_url = fetch_screen_shot_url(format)
+      result = fetch_response(format)
       puts 'received desktop url'
-      attach_img_to_snap_shot(screenshot_url) if screenshot_url
+      attach_img_to_snap_shot(result) if result['screenshot']
       puts 'attached desktop screenshot'
+      attach_html_to_snap_shot(result) if result['extracted_html']
+      puts 'attached html'
     end
 
   end
@@ -43,7 +47,7 @@ class SnapShotService
     @snap_shot = SnapShot.create!(domain_id: @domain.id, format: format)
   end
 
-  def fetch_screen_shot_url(format)
+  def fetch_response(format)
     token = Rails.application.credentials.dig(:screen_shot_api, :private_key)
     url = CGI.escape(@domain.url)
     
@@ -53,19 +57,29 @@ class SnapShotService
     response = Net::HTTP.get_response(URI.parse(query))
     result = JSON.parse(response.body)
 
-    return result['screenshot'] if response.code == "200"
+    return result if response.code == "200"
 
     puts "Error: #{response.code} - #{response.message}"
     nil
   end
 
-  def attach_img_to_snap_shot(screenshot_url)
-    file = URI.open(screenshot_url)
+  def attach_img_to_snap_shot(result)
+    file = URI.open(result['screenshot'])
     
     @snap_shot.screen_shot.attach(
       io: file,
       filename: "#{@snap_shot.id}.png",
       content_type: 'image/png'
+    )
+  end
+
+  def attach_html_to_snap_shot(result)
+    file = URI.open(result['extracted_html'])
+
+    @snap_shot.html_file.attach(
+      io: file,
+      filename: "#{@snap_shot.id}.html",
+      content_type: "text/html"
     )
   end
 

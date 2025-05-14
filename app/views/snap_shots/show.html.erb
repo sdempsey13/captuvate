@@ -13,10 +13,17 @@
         </div>
       </div>
 
-      <div class="btn-toolbar mb-2 mb-md-0">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Display Full Screen
-        </button>
+      <div class="d-flex">
+        <% if @snap_shot.html_file.attached? %>
+          <div class="btn-toolbar mb-2 mb-md-0 ms-2 me-2">
+            <%= link_to "View HTML", snap_shot_html_path(@snap_shot), target: "_blank", rel: "noopener", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Display Full Screen
+          </button>
+        </div>
       </div>
 
     </div>

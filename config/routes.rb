@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get "snap_shots/:id", to: "snap_shots#show", as: :snap_shots
   post "snap_shots/create/:id", to: "snap_shots#create", as: :take_snap_shot
+  get "snap_shots/:id/html", to: "snap_shots#show_html", as: :snap_shot_html
 
   post "domain_schedules/set_activation/:id", to: "domain_schedules#set_activation", as: :set_domain_schedule_activation
 
