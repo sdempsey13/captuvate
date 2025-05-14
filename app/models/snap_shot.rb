@@ -9,6 +9,8 @@ class SnapShot < ApplicationRecord
     attachable.variant :thumb, crop: [0, 0, 1000, 1000], preprocessed: true
   end
 
+  has_one_attached :html_file
+
   scope :for_domain_desktop, ->(domain) { where(domain_id: domain.id, format: 'desktop') }
   scope :for_domain_mobile, ->(domain) { where(domain_id: domain.id, format: 'mobile') }
 end
