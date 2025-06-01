@@ -1,10 +1,10 @@
 class SnapShotsController < ApplicationController
   before_action :set_snap_shot, only: %i[ show show_html ]
-  before_action :authenticate_user!
 
   def show
     @domains = current_user.domains
     @comments = @snap_shot.comments.reverse_order
+    authorize @snap_shot
   end
 
   def create
