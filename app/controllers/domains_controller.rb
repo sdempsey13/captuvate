@@ -1,22 +1,22 @@
 class DomainsController < ApplicationController
   before_action :set_domain, only: %i[ show show_desktop show_mobile edit update destroy ]
-  before_action :authenticate_user!
   before_action :set_domains, only: %i[ index show show_desktop show_mobile ]
 
   def index
   end
 
   def show
-    # TODO: remove this in favor of pundit auth
-    @domain = current_user.domains.find(params[:id])
+    authorize @domain
   end
 
   def show_desktop
     @snap_shots = SnapShot.for_domain_desktop(@domain)
+    authorize @domain
   end
 
   def show_mobile
     @snap_shots = SnapShot.for_domain_mobile(@domain)
+    authorize @domain
   end
 
   def new
@@ -25,6 +25,7 @@ class DomainsController < ApplicationController
   end
 
   def edit
+    authorize @domain
   end
 
   def create
@@ -42,6 +43,7 @@ class DomainsController < ApplicationController
   end
 
   def update
+    authorize @domain
     respond_to do |format|
       if @domain.update(domain_params)
         format.html { redirect_to domain_path_generator(@domain), notice: "Domain was successfully updated." }
@@ -54,6 +56,7 @@ class DomainsController < ApplicationController
   end
 
   def destroy
+    authorize @domain
     @domain.destroy!
 
     respond_to do |format|
