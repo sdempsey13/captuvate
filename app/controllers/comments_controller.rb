@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+  
   def create
     @comment = Comment.new(user_id: params[:user_id], snap_shot_id: params[:snap_shot_id], content: params[:content])
     @comment.save

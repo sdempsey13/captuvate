@@ -1,4 +1,5 @@
 class DomainSchedulesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_domain_schedule
 
   def set_activation
