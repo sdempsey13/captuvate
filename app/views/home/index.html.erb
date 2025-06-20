@@ -1,41 +1,42 @@
+<!-- app/views/pages/home.html.erb -->
+<div class="bg-white">
+  <div class="container py-5 text-center">
+    <h1 class="display-4 fw-bold">Your CRO Team’s Experiment History, Organized</h1>
+    <p class="lead text-muted mt-3 mb-4">
+      Captuvate helps you track, report, and learn from every A/B test across tools like Optimizely and Adobe Target.
+    </p>
+
+    <div class="d-flex justify-content-center gap-3">
+      <%= link_to "Get Started", new_user_registration_path, class: "btn btn-primary btn-lg px-4" %>
+      <%= link_to "Log In", new_user_session_path, class: "btn btn-outline-secondary btn-lg px-4" %>
+    </div>
+  </div>
+</div>
+
+<hr class="my-0">
+
 <div class="container py-5">
-
-  <!-- Hero Section -->
-  <div class="text-center my-5">
-    <h1 class="display-4 fw-bold">Welcome to MyApp</h1>
-    <p class="lead text-muted">Build smarter, faster, and more beautifully with us.</p>
-    <a href="#features" class="btn btn-primary btn-lg mt-3">Explore Features</a>
-  </div>
-
-  <!-- Features Section -->
-  <div id="features" class="row text-center g-4">
-    <div class="col-md-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-body">
-          <i class="bi bi-lightning-charge-fill display-4 text-primary mb-3"></i>
-          <h5 class="card-title">Fast</h5>
-          <p class="card-text">Blazing fast performance out of the box.</p>
-        </div>
-      </div>
+  <div class="row text-center">
+    <div class="col-md-4 mb-4">
+      <h5 class="fw-semibold">Historical Test Log</h5>
+      <p class="text-muted">Easily browse every past experiment with clear outcomes and metadata.</p>
     </div>
-    <div class="col-md-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-body">
-          <i class="bi bi-shield-lock-fill display-4 text-primary mb-3"></i>
-          <h5 class="card-title">Secure</h5>
-          <p class="card-text">Top-notch security features built-in.</p>
-        </div>
-      </div>
+    <div class="col-md-4 mb-4">
+      <h5 class="fw-semibold">One-Click Reporting</h5>
+      <p class="text-muted">Generate clean exports and summaries for stakeholders in seconds.</p>
     </div>
-    <div class="col-md-4">
-      <div class="card shadow-sm h-100">
-        <div class="card-body">
-          <i class="bi bi-brush-fill display-4 text-primary mb-3"></i>
-          <h5 class="card-title">Beautiful</h5>
-          <p class="card-text">Clean and modern design to impress your users.</p>
-        </div>
-      </div>
+    <div class="col-md-4 mb-4">
+      <h5 class="fw-semibold">Team Transparency</h5>
+      <p class="text-muted">Give everyone visibility into what’s been tested and why.</p>
     </div>
   </div>
-  
+</div>
+
+<hr class="my-0">
+
+<div class="bg-light py-5 text-center">
+  <div class="container">
+    <h3 class="fw-bold mb-3">Ready to make your testing history useful?</h3>
+    <%= link_to "Start Capturing", new_user_registration_path, class: "btn btn-primary btn-lg px-4" %>
+  </div>
 </div>
