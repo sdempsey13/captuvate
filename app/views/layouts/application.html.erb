@@ -38,11 +38,7 @@
 
   <body class="d-flex flex-column min-vh-100">
     <div class="container-fluid">
-      <% if user_signed_in? %>
-        <%= render "navbar_user" %>
-      <% else %>
-        <%= render "navbar_guest" %>
-      <% end %>
+      <%= render "navbar" %>
 
       <%= flash_message(:notice) %>
       <%= flash_message(:alert) %>

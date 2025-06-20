@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   
   devise_for :users
 
+  resource :dashboard, only: [:show], controller: 'dashboard'
+
   resources :domains
   get "domains/:id/desktop", to: "domains#show_desktop", as: :domain_desktop
   get "domains/:id/mobile", to: "domains#show_mobile", as: :domain_mobile
