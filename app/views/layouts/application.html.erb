@@ -16,6 +16,10 @@
 
     <link rel="apple-touch-icon" href="/icon.png">
 
+    <!-- app/views/layouts/application.html.erb -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+
+
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
@@ -47,8 +51,10 @@
       <%= yield %>
     </div>
 
-    <footer class="bg-light text-center py-3 mt-auto">
-      © <%= Time.now.year %> Captuvate. All rights reserved.
+    <footer class="bg-white border-top text-muted small py-4 mt-auto">
+      <div class="container text-center">
+        © <%= Time.current.year %> Captuvate. All rights reserved.
+      </div>
     </footer>
   </body>
 </html>

@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary px-4">
+<nav class="navbar navbar-expand-lg bg-white shadow-sm border-bottom px-4 py-2">
   <div class="container-fluid">
-    <%= link_to root_path, class: 'd-flex text-decoration-none', style: "all: unset; cursor: pointer;" do %>
-      <%= image_tag asset_path('logo_transparent.png'), style: 'height:2em; width:auto;' %>
-      <h2 class="h2 ms-2">Captuvate</h2>
+    <%= link_to root_path, class: "navbar-brand d-flex align-items-center" do %>
+      <%= image_tag asset_path('logo_transparent.png'), height: 32, class: "me-2" %>
+      <span class="fw-semibold fs-4">Captuvate</span>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,7 +11,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
+        <!-- Future nav links can go here -->
       </ul>
 
       <% if user_signed_in? %>
@@ -19,7 +19,6 @@
       <% else %>
         <%= render "navbar_guest" %>
       <% end %>
-
     </div>
   </div>
 </nav>
