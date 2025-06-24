@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render 'layouts/head' %>
+  </head>
+
+  <body class="d-flex flex-column min-vh-100">
+    <%= render "navbar" %>
+
+    <%= flash_message(:notice) %>
+    <%= flash_message(:alert) %>
+    <%= flash_message(:error) %>
+
+    <%= yield %>
+
+    <%= render "footer" %>
+  </body>
+
+</html>
