@@ -7,10 +7,6 @@
   <body class="d-flex flex-column min-vh-100">
     <%= render "navbar" %>
 
-    <%= flash_message(:notice) %>
-    <%= flash_message(:alert) %>
-    <%= flash_message(:error) %>
-
     <div class="d-flex flex-grow-1" style="height: calc(100vh - 64px);">
       <aside class="sidebar bg-white border-end h-100 px-3 py-4">
         <nav class="nav flex-column gap-2">
@@ -34,6 +30,7 @@
       </aside>
   
       <main class="flex-grow-1 overflow-auto px-4 py-4">
+        <%= render 'flash' %>
         <%= yield %>
       </main>
     </div>

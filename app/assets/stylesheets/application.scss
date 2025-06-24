@@ -8,8 +8,11 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
-@import "bootstrap_overrides";
-@import "bootstrap";
-@import "components/layout";
-@import "components/image_cards";
-@import "pages/home";
+@import 'bootstrap_overrides';
+@import 'bootstrap';
+@import 'components/layout';
+@import 'components/image_cards';
+@import 'components/buttons';
+@import 'components/flash';
+@import 'components/sidebar';
+@import 'pages/home';

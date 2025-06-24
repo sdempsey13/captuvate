@@ -5,15 +5,10 @@
   </head>
 
   <body class="d-flex flex-column min-vh-100">
-    <%= render "navbar" %>
-
-    <%= flash_message(:notice) %>
-    <%= flash_message(:alert) %>
-    <%= flash_message(:error) %>
-
+    <%= render 'navbar' %>
+    <%= render 'flash' %>
     <%= yield %>
-
-    <%= render "footer" %>
+    <%= render 'footer' %>
   </body>
 
 </html>

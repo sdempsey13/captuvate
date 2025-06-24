@@ -1,0 +1,8 @@
+<div class="flash-container position-fixed start-50 translate-middle-x" style="top: 4.5rem; z-index: 1055;">
+  <% flash.each do |type, message| %>
+    <div class="alert <%= bootstrap_class_for(type) %> alert-dismissible fade show flash-alert shadow rounded-3 px-4 py-2 text-center"
+         role="alert" style="max-width: 15vw; width: fit-content; display: inline-block;">
+      <%= message %>
+    </div>
+  <% end %>
+</div>
