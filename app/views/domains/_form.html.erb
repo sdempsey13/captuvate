@@ -64,7 +64,7 @@
   </fieldset>
 
   <div class="d-grid mb-3">
-    <%= form.submit domain.persisted? ? "Update Domain" : "Create Domain", class: "btn btn-primary" %>
+    <%= form.submit domain.persisted? ? "Update Domain" : "Create Domain", class: "btn-custom btn-custom-primary" %>
   </div>
 <% end %>
 
@@ -75,14 +75,14 @@
     <%= button_to "Deactivate Domain", 
       set_domain_schedule_activation_path(@domain.domain_schedule), 
       method: :post, 
-      class: "btn btn-outline-danger mb-2",
+      class: "btn-custom btn-outline-danger mb-2",
       style: "width:100%;" 
     %>
     <%= button_to "Delete Domain", 
       domain_path(@domain), 
       method: :delete, 
       data: { turbo_confirm: 'Are you sure you want to delete this domain? This action cannot be undone' }, 
-      class: "btn btn-danger", 
+      class: "btn-custom btn-danger", 
       style: "width:100%;" 
     %>
   </div>

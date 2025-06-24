@@ -15,7 +15,7 @@
 
       <div class="d-flex">
         <div class="btn-toolbar mb-2 mb-md-0">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button type="button" class="btn-custom btn-custom-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Display Full Screen
           </button>
         </div>
@@ -39,7 +39,7 @@
             </div>
             <%= f.hidden_field :user_id, value: current_user.id %>
             <%= f.hidden_field :snap_shot_id, value: @snap_shot.id %>
-            <%= f.submit "Add Comment", class: "btn btn-primary" %>
+            <%= f.submit "Add Comment", class: "btn-custom btn-custom-primary" %>
           <% end %>
         </div>
         <% @comments.each do |comment| %>
