@@ -3,3 +3,13 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "@popperjs/core"
 import "bootstrap"
+
+document.addEventListener("turbo:load", () => {
+  document.querySelectorAll(".flash-alert").forEach((alert) => {
+    setTimeout(() => {
+      alert.classList.remove("show");
+      setTimeout(() => alert.remove(), 500);
+    }, 3000);
+  });
+});
+  

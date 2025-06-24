@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
+  layout :set_devise_layout
+
   include Pundit::Authorization
   include PathUtils
 
@@ -12,6 +14,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def set_devise_layout
+    devise_controller? ? 'home' : nil
+  end
 
   def not_authorized
     flash[:alert] = "You are not permitted to view that page."

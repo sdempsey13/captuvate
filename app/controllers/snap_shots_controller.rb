@@ -1,4 +1,6 @@
 class SnapShotsController < ApplicationController
+  layout 'home'
+  
   before_action :authenticate_user!
   before_action :set_snap_shot, only: %i[ show show_html ]
 

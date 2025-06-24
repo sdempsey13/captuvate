@@ -24,6 +24,7 @@ gem 'pundit', '~> 2.5'
 gem 'bootstrap', '~> 5.3.3'
 gem 'dartsass-rails', '~> 0.5.1'
 gem 'rails_icons', '~> 1.2'
+# Installed icon library is heroicons. See their icons: https://heroicons.com/
 
 gem 'mailgun-ruby', '~> 1.3', '>= 1.3.5'
 

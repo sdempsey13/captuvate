@@ -1,0 +1,11 @@
+.flash-container {
+    pointer-events: none; // allow clicks to pass through container
+  }
+  
+  .flash-alert {
+    pointer-events: auto; // but allow interaction with individual alerts
+    background-color: white; // optional if using light alerts
+    opacity: 0.95;
+    transition: opacity 0.4s ease;
+  }
+  
