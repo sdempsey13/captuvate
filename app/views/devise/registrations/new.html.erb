@@ -1,40 +1,31 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header text-center">
-          <h2>Sign Up</h2>
-        </div>
-        <div class="card-body">
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "needs-validation" }) do |f| %>
-            <div class="mb-3">
-              <%= f.label :email, class: "form-label" %>
-              <%= f.email_field :email, autofocus: true, class: "form-control" %>
-            </div>
-
-            <div class="mb-3">
-              <%= f.label :password, class: "form-label" %>
-                <% if @minimum_password_length %>
-                <em>(<%= @minimum_password_length %> characters minimum)</em>
-                <% end %><br />
-              <%= f.password_field :password, class: "form-control" %>
-            </div>
-
-            <div class="mb-3">
-              <%= f.label :password_confirmation, class: "form-label" %>
-              <%= f.password_field :password_confirmation, class: "form-control" %>
-            </div>
-
-            <div class="d-grid">
-              <%= f.submit "Sign up", class: "btn-custom btn-custom-primary" %>
-            </div>
-          <% end %>
-
-          <div class="mt-3 text-center">
-            <%= link_to "Already have an account? Log in", new_session_path(resource_name), class: "text-decoration-none" %>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="text-center mb-5">
+  <%= image_tag 'logo_transparent.png', alt: "Captuvate Logo", style: "height: 48px;" %>
+  <div class="mt-2">
+    <p class="text-muted">Create your account</p>
   </div>
 </div>
+
+<%= form_with model: resource, url: registration_path(resource_name), local: true do |f| %>
+  <div class="mb-3">
+    <%= f.label :email, class: "form-label" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :password, class: "form-label" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+  </div>
+
+  <div class="mb-5">
+    <%= f.label :password_confirmation, class: "form-label" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+  </div>
+
+  <div class="d-grid mb-3">
+    <%= f.submit "Sign up", class: "btn btn-custom-primary" %>
+  </div>
+
+  <div class="text-center">
+    <small>Already have an account? <%= link_to "Sign in", new_session_path(resource_name), class: "text-decoration-none text-primary" %></small>
+  </div>
+<% end %>
