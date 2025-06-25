@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_devise_layout
-    devise_controller? ? 'home' : nil
+    devise_controller? ? 'devise' : nil
   end
 
   def not_authorized
