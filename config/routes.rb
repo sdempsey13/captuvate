@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   resource :dashboard, only: [:show], controller: 'dashboard'
 
+  namespace :settings do
+    resource :api_keys, only: [:show]
+  end
+  
   resources :domains
   get "domains/:id/desktop", to: "domains#show_desktop", as: :domain_desktop
   get "domains/:id/mobile", to: "domains#show_mobile", as: :domain_mobile
