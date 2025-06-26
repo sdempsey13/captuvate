@@ -11,6 +11,9 @@
       </li>
     <% end %>
     <li>
+      <%= link_to 'Dashboard', dashboard_path, class: 'dropdown-item' %>
+    </li>
+    <li>
       <%= link_to "Sign out", destroy_user_session_path,
         class: "dropdown-item text-danger",
         data: { turbo_method: :delete } %>

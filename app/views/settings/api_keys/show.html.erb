@@ -1,0 +1,28 @@
+<!-- app/views/settings/api_keys.html.erb -->
+
+<h2 class="mb-4">Settings</h2>
+<hr>
+
+<div class="row">
+  <!-- Sidebar -->
+  <aside class="col-md-3">
+    <nav class="nav flex-column gap-2 bg-light rounded p-3">
+      <%= link_to settings_api_keys_path, class: "nav-link d-flex align-items-center gap-2 px-2 py-2 rounded fw-semibold text-dark #{'active' if current_page?(settings_api_keys_path)}" do %>
+        <%= icon "key", style: "width: 1.25em; height: 1.25em;" %>
+        <span>API Key</span>
+      <% end %>
+      <%# Add other links here when you expand settings %>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="col-md-9">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h4 class="card-title mb-3">API Key</h4>
+
+        
+      </div>
+    </div>
+  </main>
+</div>
