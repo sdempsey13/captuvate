@@ -1,11 +1,13 @@
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
+  include PathUtils
+
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
   layout :set_devise_layout
 
-  include Pundit::Authorization
-  include PathUtils
+  helper_method :current_organization
 
   rescue_from Pundit::NotAuthorizedError, with: :not_authorized
 
@@ -14,6 +16,16 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def current_organization
+    return @current_organization if defined?(@current_organization)
+
+    if current_user.admin? && params[:organization_id]
+      @current_organization = Organization.find_by(id: params[:organization_id])
+    else
+      @current_organization = current_user.organization
+    end
+  end
 
   def set_devise_layout
     devise_controller? ? 'devise' : nil

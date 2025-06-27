@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resource :dashboard, only: [:show], controller: 'dashboard'
 
   namespace :settings do
-    resource :api_keys, only: [:show]
+    resources :api_keys, controller: "integration_credentials", only: [:index, :create]
   end
   
   resources :domains
