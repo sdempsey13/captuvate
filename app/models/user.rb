@@ -20,11 +20,11 @@ class User < ApplicationRecord
     joins(:site_role).where(site_roles: { role: SiteRole.roles[:admin] })
   }
 
-  def admin?
+  def site_admin?
     site_role&.admin?
   end
 
-  def client?
+  def site_client?
     site_role&.client?
   end
 

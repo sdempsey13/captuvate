@@ -10,6 +10,6 @@ class SnapShotPolicy < ApplicationPolicy
   private
   
   def owner_or_admin?
-    record.domain.user_id == user.id || user.admin?
+    record.domain.user_id == user.id || user.site_admin?
   end
 end
