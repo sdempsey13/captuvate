@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :snap_shots, through: :domains
   has_many :comments, dependent: :destroy
 
-  delegate :role, to: :site_role, allow_nil: true
+  accepts_nested_attributes_for :organization
 
   after_create :assign_default_site_role
 
