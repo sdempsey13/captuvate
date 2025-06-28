@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_26_213148) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_28_185413) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -85,15 +85,27 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_26_213148) do
   end
 
   create_table "integrations", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_integrations_on_name", unique: true
+  end
+
+  create_table "organization_roles", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "organization_id", null: false
+    t.integer "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_organization_roles_on_organization_id"
+    t.index ["user_id"], name: "index_organization_roles_on_user_id"
   end
 
   create_table "organizations", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_organizations_on_name", unique: true
   end
 
   create_table "site_roles", force: :cascade do |t|
@@ -134,6 +146,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_26_213148) do
   add_foreign_key "domains", "users"
   add_foreign_key "integration_credentials", "integrations"
   add_foreign_key "integration_credentials", "organizations"
+  add_foreign_key "organization_roles", "organizations"
+  add_foreign_key "organization_roles", "users"
   add_foreign_key "site_roles", "users"
   add_foreign_key "snap_shots", "domains"
   add_foreign_key "users", "organizations"

@@ -26,6 +26,6 @@ class DomainPolicy < ApplicationPolicy
   private
 
   def owner_or_admin?
-    record.user_id == user.id || user.admin?
+    record.user_id == user.id || user.site_admin?
   end
 end

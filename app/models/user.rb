@@ -12,15 +12,19 @@ class User < ApplicationRecord
   has_many :snap_shots, through: :domains
   has_many :comments, dependent: :destroy
 
-  delegate :role, to: :site_role, allow_nil: true
+  accepts_nested_attributes_for :organization
 
   after_create :assign_default_site_role
 
-  def admin?
+  scope :admin, -> { 
+    joins(:site_role).where(site_roles: { role: SiteRole.roles[:admin] })
+  }
+
+  def site_admin?
     site_role&.admin?
   end
 
-  def client?
+  def site_client?
     site_role&.client?
   end
 

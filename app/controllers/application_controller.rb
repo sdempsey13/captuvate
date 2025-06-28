@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   def current_organization
     return @current_organization if defined?(@current_organization)
 
-    if current_user.admin? && params[:organization_id]
+    if current_user.site_admin? && params[:organization_id]
       @current_organization = Organization.find_by(id: params[:organization_id])
     else
       @current_organization = current_user.organization

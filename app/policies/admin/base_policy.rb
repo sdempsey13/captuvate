@@ -24,7 +24,7 @@ module Admin
     private
 
     def admin_user?
-      user&.admin?
+      user&.site_admin?
     end
   end
 end
