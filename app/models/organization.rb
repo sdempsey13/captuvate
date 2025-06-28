@@ -1,5 +1,5 @@
 class Organization < ApplicationRecord
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
   has_many :users
   has_many :integration_credentials
