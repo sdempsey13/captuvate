@@ -32,6 +32,16 @@ module Settings
       end
     end
 
+    def destroy
+      @integration_credential = IntegrationCredential.find(params[:id])
+      @integration_credential.destroy
+
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to settings_api_keys_path, notice: "API deleted"}
+      end
+    end
+
     private
 
     def integration_credentials_params
