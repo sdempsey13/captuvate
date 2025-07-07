@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  validates :email, presence: true, uniqueness: true
+  validates :organization, presence: true
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -16,7 +19,7 @@ class User < ApplicationRecord
 
   after_create :assign_default_site_role
 
-  scope :admin, -> { 
+  scope :site_admin, -> { 
     joins(:site_role).where(site_roles: { role: SiteRole.roles[:admin] })
   }
 
