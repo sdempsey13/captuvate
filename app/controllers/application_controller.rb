@@ -33,6 +33,6 @@ class ApplicationController < ActionController::Base
 
   def not_authorized
     flash[:alert] = "You are not permitted to view that page."
-    redirect_to domains_path
+    redirect_to dashboard_path
   end
 end
