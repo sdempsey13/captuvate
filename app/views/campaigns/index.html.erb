@@ -1,0 +1,90 @@
+<%= javascript_include_tag 'https://cdn.jsdelivr.net/npm/chart.js', defer: true %>
+
+<div class="container-fluid mt-4">
+  <div class="row">
+    <!-- Sidebar Filters -->
+    <aside class="col-md-3 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Filters</h5>
+
+          <form>
+            <div class="mb-3">
+              <label for="testType" class="form-label">Test Type</label>
+              <select class="form-select" id="testType">
+                <option value="">All</option>
+                <option value="ab">A/B</option>
+                <option value="multivariate">Multivariate</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="status" class="form-label">Status</label>
+              <select class="form-select" id="status">
+                <option value="">All</option>
+                <option value="running">Running</option>
+                <option value="completed">Completed</option>
+                <option value="paused">Paused</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="startDate" class="form-label">Start Date</label>
+              <input type="date" class="form-control" id="startDate">
+            </div>
+
+            <div class="mb-3">
+              <label for="endDate" class="form-label">End Date</label>
+              <input type="date" class="form-control" id="endDate">
+            </div>
+
+            <div class="mb-3">
+              <label for="search" class="form-label">Search</label>
+              <input type="text" class="form-control" id="search" placeholder="Search by name">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Apply</button>
+          </form>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Chart Area -->
+    <main class="col-md-9">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Test Summary</h5>
+          <canvas id="testsChart" height="100"></canvas>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const ctx = document.getElementById('testsChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Test A', 'Test B', 'Test C', 'Test D'],
+        datasets: [{
+          label: 'Conversion Rate (%)',
+          data: [10.2, 13.5, 8.1, 15.3],
+          backgroundColor: '#0d6efd'
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Conversion Rate (%)'
+            }
+          }
+        }
+      }
+    });
+  });
+</script>

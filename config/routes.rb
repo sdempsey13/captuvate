@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
   resource :dashboard, only: [:show], controller: 'dashboard'
+  resources :campaigns, only: [:index, :show], path: 'tests'
 
   namespace :settings do
     resources :api_keys, controller: "integration_credentials", only: [:index, :create, :destroy]
