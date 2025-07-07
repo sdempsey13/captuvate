@@ -1,1 +1,123 @@
-<h1>Hello Dashboard</h1>
+<div class="container-fluid">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 >Optimization Impact Dashboard</h2>
+    <div>
+      <input class="form-control d-inline w-auto me-2" >Last 3 mos.</input>
+      <input type="date" class="form-control d-inline w-auto" />
+    </div>
+  </div>
+
+  <div class="row mb-4">
+
+    <div class="col-md-2 mb-3">
+      <div class="card text-center p-3 bg-white">
+        <h5 class="card-title">Financial Impact</h5>
+        <h4 class="text-success">+XXX</h4>
+        <small class="text-muted">+X%</small>
+      </div>
+    </div>
+
+    <div class="col-md-2 mb-3">
+      <div class="card shadow-sm text-center p-3">
+        <h5 class="card-title">Test Count</h5>
+        <h4 class="text-success">+XXX</h4>
+        <small class="text-muted">+X%</small>
+      </div>
+    </div>
+  
+    <div class="col-md-2 mb-3">
+      <div class="card shadow-sm text-center p-3">
+         <h5 class="card-title">Avg. Confidence</h5>
+         <h4 class="text-success">+XXX</h4>
+        <small class="text-muted">+X%</small>
+      </div>
+    </div>
+
+    <div class="col-md-2 mb-3">
+      <div class="card shadow-sm text-center p-3">
+        <h5 class="card-title">Avg. Lift</h5>
+        <h4 class="text-success">+XXX</h4>
+        <small class="text-muted">+X%</small>
+      </div>
+    </div>
+
+    <div class="col-md-2 mb-3">
+      <div class="card shadow-sm text-center p-3">
+        <h5 class="card-title">Stat Title</h5>
+        <h4 class="text-success">+XXX</h4>
+        <small class="text-muted">+X%</small>
+      </div>
+    </div>
+
+    <div class="col-md-2 mb-3">
+      <div class="card shadow-sm text-center p-3">
+        <h5 class="card-title">Win Rate</h5>
+        <h4 class="text-success">+XXX</h4>
+        <small class="text-muted">+X%</small>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-8">
+      <div class="card shadow-sm p-3">
+        <h5 class="mb-3">Historical Trend</h5>
+        <div class="placeholder-glow" style="height: 250px; background-color: #f8f9fa;"></div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm p-3">
+        <h5 class="mb-3">Upcoming Tests</h5>
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th>Test Name</th>
+              <th>Start</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% 5.times do %>
+              <tr>
+                <td>Test Title</td>
+                <td>08/01/25</td>
+                <td><a href="#">View</a></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow-sm p-3">
+    <h5 class="mb-3">Tests in This View</h5>
+    <table class="table table-bordered table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th class='w-10'>Name</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Primary Metric</th>
+          <th>Winner?</th>
+          <th>Confidence</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% 7.times do %>
+          <tr>
+            <td class='w-10'>Home Page Copy Update</td>
+            <td>4/1/25</td>
+            <td>4/30/25</td>
+            <td>AOV</td>
+            <td class="text-success">yes</td>
+            <td class="text-success">96%</td>
+            <td><span class="badge bg-success">Complete</span></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
