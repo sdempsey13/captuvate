@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_07_013139) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_07_222225) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -104,6 +104,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_013139) do
     t.index ["name"], name: "index_integrations_on_name", unique: true
   end
 
+  create_table "organization_memberships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "organization_id", null: false
+    t.integer "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_organization_memberships_on_organization_id"
+    t.index ["user_id"], name: "index_organization_memberships_on_user_id"
+  end
+
   create_table "organization_roles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "organization_id", null: false
@@ -159,6 +169,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_013139) do
   add_foreign_key "domains", "users"
   add_foreign_key "integration_credentials", "integrations"
   add_foreign_key "integration_credentials", "organizations"
+  add_foreign_key "organization_memberships", "organizations"
+  add_foreign_key "organization_memberships", "users"
   add_foreign_key "organization_roles", "organizations"
   add_foreign_key "organization_roles", "users"
   add_foreign_key "site_roles", "users"

@@ -13,12 +13,12 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
   </div>
 
-  <%= f.fields_for :organization do |organization_fields| %>
-    <div class="mb-3">
-      <%= organization_fields.label :name, "Organization", class: 'form-label' %>
-      <%= organization_fields.text_field :name, class: 'form-control' %>
-    </div>
-  <% end %>
+  <div class="mb-3">
+    <%= f.fields_for :organization_attributes, @organization do |org| %>
+      <%= org.label :name, class: "form-label" %>
+      <%= org.text_field :name, class: "form-control" %>
+    <% end %>
+  </div>
 
   <div class="mb-3">
     <%= f.label :password, class: "form-label" %>

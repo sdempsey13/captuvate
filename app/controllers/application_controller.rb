@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     if current_user.site_admin? && params[:organization_id]
       @current_organization = Organization.find_by(id: params[:organization_id])
     else
-      @current_organization = current_user.organization
+      @current_organization = current_user.organizations.first
     end
   end
 
