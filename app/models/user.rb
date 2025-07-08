@@ -21,8 +21,12 @@ class User < ApplicationRecord
 
   after_create :assign_default_site_role
 
-  scope :admin, -> { 
+  scope :admin, -> {
     joins(:site_role).where(site_roles: { role: SiteRole.roles[:admin] })
+  }
+
+  scope :client, -> {
+    joins(:site_role).where(site_roles: { role: SiteRole.roles[:client] })
   }
 
   def site_admin?
