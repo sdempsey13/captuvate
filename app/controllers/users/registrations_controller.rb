@@ -6,15 +6,29 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    super do |resource|
-      resource.build_organization
-    end
+    build_resource({})
+    @organization = Organization.new
+    respond_with resource
   end
 
-  # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    @user = UserSignUpService.new(sign_up_params).call
+
+    if @user.persisted?
+      sign_up(resource_name, @user)
+      redirect_to after_sign_up_path_for(@user)
+    else
+      flash.now[:alert] = 'There was a problem signing up.'
+      clean_up_passwords @user
+      @organization = Organization.new(sign_up_params[:organization_attributes])
+      respond_with @user
+    end
+  rescue ActiveRecord::RecordInvalid => e
+    flash.now[:alert] = "Sign-up failed: #{e.message}"
+    @user ||= User.new(sign_up_params.except(:organization_attributes))
+    @organization = Organization.new(sign_up_params[:organization_attributes])
+    respond_with @user
+  end
 
   # GET /resource/edit
   # def edit
@@ -44,12 +58,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [
-      :email,
-      :password,
-      :password_confirmation,
-      organization_attributes: [:name]
-    ])
+    devise_parameter_sanitizer.permit(
+      :sign_up,
+      keys: [
+        :name,
+        :email,
+        :password,
+        :password_confirmation,
+        organization_attributes: [:name]
+      ]
+    )
   end
 
   # If you have extra params to permit, append them to the sanitizer.

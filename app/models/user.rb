@@ -1,18 +1,23 @@
 class User < ApplicationRecord
+  validates :email, presence: true, uniqueness: true
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  belongs_to :organization
+  belongs_to :organization, optional: true
 
   has_one :site_role, dependent: :destroy
+
+  has_many :organization_memberships
+  has_many :organizations, through: :organization_memberships
+
+  accepts_nested_attributes_for :organization
 
   has_many :domains, dependent: :destroy
   has_many :snap_shots, through: :domains
   has_many :comments, dependent: :destroy
-
-  accepts_nested_attributes_for :organization
 
   after_create :assign_default_site_role
 
