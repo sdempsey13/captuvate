@@ -6,14 +6,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  belongs_to :organization, optional: true
-
   has_one :site_role, dependent: :destroy
 
   has_many :organization_memberships
   has_many :organizations, through: :organization_memberships
-
-  accepts_nested_attributes_for :organization
 
   has_many :domains, dependent: :destroy
   has_many :snap_shots, through: :domains
