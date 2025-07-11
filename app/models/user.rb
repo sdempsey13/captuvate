@@ -8,8 +8,11 @@ class User < ApplicationRecord
 
   has_one :site_role, dependent: :destroy
 
-  has_many :organization_memberships
+  has_many :organization_memberships, dependent: :destroy
   has_many :organizations, through: :organization_memberships
+
+  has_many :workspace_memberships, dependent: :destroy
+  has_many :workspaces, through: :workspace_memberships
 
   has_many :domains, dependent: :destroy
   has_many :snap_shots, through: :domains
