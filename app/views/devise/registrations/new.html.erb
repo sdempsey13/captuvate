@@ -15,7 +15,7 @@
 
   <div class="mb-3">
     <%= f.fields_for :organization_attributes, @organization do |org| %>
-      <%= org.label :name, class: "form-label" %>
+      <%= org.label :organization, class: "form-label" %>
       <%= org.text_field :name, class: "form-control" %>
     <% end %>
   </div>
