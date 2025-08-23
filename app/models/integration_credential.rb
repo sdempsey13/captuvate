@@ -9,9 +9,15 @@ class IntegrationCredential < ApplicationRecord
 
   before_save :set_masked_api_key, if: -> { encrypted_api_key_changed? && encrypted_api_key.present? }
 
+  after_create :back_populate_new_integration
+
   private
 
   def set_masked_api_key
     self.masked_api_key = "*****#{self.encrypted_api_key.last(5)}"
+  end
+
+  def back_populate_new_integration
+    BackPopulateOrchestratorJob.perform_later(self)
   end
 end
