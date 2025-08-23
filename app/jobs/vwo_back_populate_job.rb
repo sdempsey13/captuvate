@@ -3,13 +3,12 @@ class VwoBackPopulateJob < ApplicationJob
 
   require 'uri'
   require 'net/http'
+  require 'json'
 
   def perform(integration_credential)
-    binding.pry
-    ## make an API request to get all of the campaings for 
-    response = call_vwo_api(integration_credcential)
-    
-    # Cycle through each campaign and save/update them
+    response = call_vwo_api(integration_credential)
+    json_data = parse_response_to_json(response)
+    VwoCampaignIngestorService.new(json_data).ingest!
   end
 
   private
@@ -25,5 +24,9 @@ class VwoBackPopulateJob < ApplicationJob
     request["token"] = integration_credential.encrypted_api_key
 
     response = http.request(request)
+  end
+
+  def parse_response_to_json(response)
+    ActiveSupport::JSON.parse(response.body)["_data"]
   end
 end
