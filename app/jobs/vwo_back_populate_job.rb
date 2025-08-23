@@ -8,7 +8,7 @@ class VwoBackPopulateJob < ApplicationJob
   def perform(integration_credential)
     response = call_vwo_api(integration_credential)
     json_data = parse_response_to_json(response)
-    VwoCampaignIngestorService.new(json_data).ingest!
+    VwoCampaignIngestorService.new(json_data, integration_credential).ingest!
   end
 
   private
@@ -27,6 +27,6 @@ class VwoBackPopulateJob < ApplicationJob
   end
 
   def parse_response_to_json(response)
-    ActiveSupport::JSON.parse(response.body)["_data"]
+    ActiveSupport::JSON.decode(response.body)["_data"]
   end
 end
