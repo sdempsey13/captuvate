@@ -3,4 +3,5 @@ class Campaign < ApplicationRecord
   validates :source, presence: true  
 
   belongs_to :organization
+  belongs_to :integration
 end
