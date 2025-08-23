@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_08_181854) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_23_204442) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -51,7 +51,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_08_181854) do
     t.datetime "ended_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "organization_id"
     t.index ["external_id"], name: "index_campaigns_on_external_id"
+    t.index ["organization_id"], name: "index_campaigns_on_organization_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -151,6 +153,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_08_181854) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "campaigns", "organizations"
   add_foreign_key "comments", "snap_shots"
   add_foreign_key "comments", "users"
   add_foreign_key "domain_schedules", "domains"
