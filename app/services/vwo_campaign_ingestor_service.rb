@@ -6,8 +6,7 @@ class VwoCampaignIngestorService
 
   def ingest!
     rows = collect_rows
-    
-    Campaign.upsert_all(rows, unique_by: :index_campaigns_on_external_platform_org)
+    upsert_rows(rows)
   end
 
   private
@@ -24,5 +23,9 @@ class VwoCampaignIngestorService
         campaigns_metadata:   campaign
       }
     end
+  end
+
+  def upsert_rows(rows)
+    Campaign.upsert_all(rows, unique_by: :index_campaigns_on_external_platform_org)
   end
 end
