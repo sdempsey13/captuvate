@@ -6,4 +6,6 @@ class Organization < ApplicationRecord
   
   has_many :integration_credentials
   has_many :integrations, through: :integration_credentials
+
+  has_many :campaigns
 end
