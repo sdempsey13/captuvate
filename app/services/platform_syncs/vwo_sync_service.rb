@@ -8,7 +8,7 @@ module PlatformSyncs
       response = call_vwo_api(@integration_credential)
       json_data = parse_response_to_json(response)
 
-      row = collect_rows
+      rows = collect_rows(json_data)
       upsert_rows(rows)
     end
 
@@ -31,8 +31,8 @@ module PlatformSyncs
       ActiveSupport::JSON.decode(response.body)["_data"]
     end
 
-    def collect_rows
-      @data.map do |campaign|
+    def collect_rows(json_data)
+      json_data.map do |campaign|
         {
           name:                 campaign["name"],
           integration_id:       @integration_credential.integration.id,
