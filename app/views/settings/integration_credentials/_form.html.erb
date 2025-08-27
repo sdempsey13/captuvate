@@ -13,7 +13,7 @@
     
     <div class="mb-3">
       <%= form.label :integration_id, "Integration", class: "form-label" %>
-      <%= form.collection_select :integration_id, Integration.all, :id, :name, { prompt: "Select an Integration" }, { class: "form-select" } %>
+      <%= form.collection_select :integration_id, Integration.all, :id, :display_name, { prompt: "Select an Integration" }, { class: "form-select" } %>
     </div>
   
     <div class="mb-3">
