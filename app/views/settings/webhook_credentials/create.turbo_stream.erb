@@ -1,0 +1,2 @@
+<%= turbo_stream.prepend "webhook-credential-list", partial: "settings/webhook_credentials/credential", locals: { credential: @webhook_credential } %>
+<%= turbo_stream.replace "webhook_credential_form", partial: "settings/webhook_credentials/form", locals: { webhook_credential: WebhookCredential.new } %>
