@@ -1,6 +1,6 @@
 module Settings
   class IntegrationCredentialsController < ApplicationController
-    before_action :authenticate_user!
+    
     def index
       @integration_credentials = current_organization.integration_credentials
       @integration_credential = IntegrationCredential.new

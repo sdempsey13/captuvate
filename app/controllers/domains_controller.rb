@@ -1,7 +1,6 @@
 class DomainsController < ApplicationController
   layout 'home'
   
-  before_action :authenticate_user!
   before_action :set_domain, only: %i[ show show_desktop show_mobile edit update destroy ]
   before_action :set_domains, only: %i[ index show show_desktop show_mobile ]
 

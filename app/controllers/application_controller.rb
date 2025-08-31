@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   include PathUtils
 
+  before_action :authenticate_user!, unless: :home_controller?
+
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
@@ -34,5 +36,9 @@ class ApplicationController < ActionController::Base
   def not_authorized
     flash[:alert] = "You are not permitted to view that page."
     redirect_to dashboard_path
+  end
+
+  def home_controller?
+    is_a?(HomeController)
   end
 end
