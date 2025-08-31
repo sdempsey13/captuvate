@@ -2,7 +2,13 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   include PathUtils
 
-  before_action :authenticate_user!, unless: :home_controller?
+  before_action :authenticate_user!, unless: :non_auth_controller?
+
+  NON_AUTH_CONTROLLERS = [
+    'HomeController',
+    'VwoWebhooksController',
+    'HealthcheckController'
+  ].freeze
 
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
@@ -38,7 +44,7 @@ class ApplicationController < ActionController::Base
     redirect_to dashboard_path
   end
 
-  def home_controller?
-    is_a?(HomeController)
+  def non_auth_controller?
+    NON_AUTH_CONTROLLERS.include?(self.class.name)
   end
 end
