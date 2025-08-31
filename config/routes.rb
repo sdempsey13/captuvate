@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   namespace :settings do
     resources :api_keys, controller: "integration_credentials", only: [:index, :create, :destroy]
+    resources :webhooks, controller: "webhook_credentials", only: [:index, :create, :destroy]
   end
 
   post "/vwo/webhooks", to: "vwo_webhooks#receive"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_27_213002) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_29_062613) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -155,6 +155,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_27_213002) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "webhook_credentials", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "integration_id", null: false
+    t.string "encrypted_secret_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["integration_id"], name: "index_webhook_credentials_on_integration_id"
+    t.index ["organization_id", "integration_id"], name: "idx_on_organization_id_integration_id_b952700e68", unique: true
+    t.index ["organization_id"], name: "index_webhook_credentials_on_organization_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "campaigns", "integrations"
@@ -169,4 +180,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_27_213002) do
   add_foreign_key "organization_memberships", "users"
   add_foreign_key "site_roles", "users"
   add_foreign_key "snap_shots", "domains"
+  add_foreign_key "webhook_credentials", "integrations"
+  add_foreign_key "webhook_credentials", "organizations"
 end
