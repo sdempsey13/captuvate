@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_09_031354) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_31_212508) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -111,7 +111,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_09_031354) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organization_id"], name: "index_organization_memberships_on_organization_id"
-    t.index ["user_id"], name: "index_organization_memberships_on_user_id"
+    t.index ["user_id"], name: "index_organization_memberships_on_user_id", unique: true
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -155,6 +155,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_09_031354) do
     t.integer "role", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "workspace_id"], name: "index_workspace_memberships_on_user_id_and_workspace_id", unique: true
     t.index ["user_id"], name: "index_workspace_memberships_on_user_id"
     t.index ["workspace_id"], name: "index_workspace_memberships_on_workspace_id"
   end
