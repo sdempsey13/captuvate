@@ -2,15 +2,25 @@ class VwoWebhooksController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def receive
+    # when we're done writing this, just wrap it all up in a job so we don't ever stop the servers for these
+    # ConsumeWebhookJob.perform_later(request)
     raw_body = request.body.read
 
     signature = request.headers['x-vwo-auth']
 
-    verify_signature!(raw_body, signature)
-
     payload = JSON.parse(raw_body)
 
-    VwoCampaignIngestor.new(payload.to_json).ingest!
+    #find this companies api_credential
+    #either match it off the secret key? or info in the payload, like account_id from VWO side
+    binding.pry
+    integration_credential = find_integration_credential(signature)
+    
+    def find_integration_credential(signature)
+      WebhookCredential.where(encrypted_secret_key: signature).first.organization.integration_credentials.first
+    end
+
+    binding.pry
+    PlatformSyncOrchetsatorJob.perform_later(integration_credential)
 
     head :ok
   rescue JSON::ParserError => e
