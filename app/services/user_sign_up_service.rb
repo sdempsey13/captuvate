@@ -5,12 +5,11 @@ class UserSignUpService
 
   def call
     org_attrs = @user_params.delete(:organization_attributes)
-    raise ArgumentError, "Missing organization attributes" unless org_attrs.present?
+    raise ArgumentError, 'Missing organization attributes' unless org_attrs.present?
 
     User.transaction do
       organization = Organization.create!(org_attrs)
-      user = User.new(@user_params)
-      user.save!
+      user = User.create!(@user_params)
 
       OrganizationMembership.create!(
         user: user,
@@ -18,6 +17,14 @@ class UserSignUpService
         role: :admin
       )
 
+      workspace = organization.workspaces.create!(name: 'Default Workspace')
+
+      WorkspaceMembership.create!(
+        user: user,
+        workspace: workspace,
+        role: :admin
+      )
+      
       user
     end
   end

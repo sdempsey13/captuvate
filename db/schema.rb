@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_08_181854) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_31_212508) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -111,7 +111,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_08_181854) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organization_id"], name: "index_organization_memberships_on_organization_id"
-    t.index ["user_id"], name: "index_organization_memberships_on_user_id"
+    t.index ["user_id"], name: "index_organization_memberships_on_user_id", unique: true
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -149,6 +149,26 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_08_181854) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "workspace_memberships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "workspace_id", null: false
+    t.integer "role", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "workspace_id"], name: "index_workspace_memberships_on_user_id_and_workspace_id", unique: true
+    t.index ["user_id"], name: "index_workspace_memberships_on_user_id"
+    t.index ["workspace_id"], name: "index_workspace_memberships_on_workspace_id"
+  end
+
+  create_table "workspaces", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id", "name"], name: "index_workspaces_on_organization_id_and_name", unique: true
+    t.index ["organization_id"], name: "index_workspaces_on_organization_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "snap_shots"
@@ -161,4 +181,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_08_181854) do
   add_foreign_key "organization_memberships", "users"
   add_foreign_key "site_roles", "users"
   add_foreign_key "snap_shots", "domains"
+  add_foreign_key "workspace_memberships", "users"
+  add_foreign_key "workspace_memberships", "workspaces"
+  add_foreign_key "workspaces", "organizations"
 end
