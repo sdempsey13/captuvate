@@ -11,8 +11,8 @@ class WorkspaceMembership < ApplicationRecord
   private
 
   def user_must_belong_to_workspace_org
-    if user.organization_id != workspace.organization_id
-      errors.add(:base, "User must belong to the same organization as the workspace")
+    if user.organization != workspace.organization
+      errors.add(:base, 'User must belong to the same organization as the workspace')
     end
   end
 end
