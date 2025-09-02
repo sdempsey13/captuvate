@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_31_212508) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_02_215339) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -40,6 +40,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_31_212508) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "api_credentials", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "integration_id", null: false
+    t.text "encrypted_api_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "masked_api_key"
+    t.index ["integration_id"], name: "index_api_credentials_on_integration_id"
+    t.index ["organization_id"], name: "index_api_credentials_on_organization_id"
   end
 
   create_table "campaigns", force: :cascade do |t|
@@ -89,17 +100,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_31_212508) do
     t.boolean "collects_desktop", default: true, null: false
     t.boolean "collects_mobile", default: true, null: false
     t.index ["user_id"], name: "index_domains_on_user_id"
-  end
-
-  create_table "integration_credentials", force: :cascade do |t|
-    t.bigint "organization_id", null: false
-    t.bigint "integration_id", null: false
-    t.text "encrypted_api_key"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "masked_api_key"
-    t.index ["integration_id"], name: "index_integration_credentials_on_integration_id"
-    t.index ["organization_id"], name: "index_integration_credentials_on_organization_id"
   end
 
   create_table "integrations", force: :cascade do |t|
@@ -164,6 +164,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_31_212508) do
     t.index ["integration_id"], name: "index_webhook_credentials_on_integration_id"
     t.index ["organization_id", "integration_id"], name: "idx_on_organization_id_integration_id_b952700e68", unique: true
     t.index ["organization_id"], name: "index_webhook_credentials_on_organization_id"
+  end
+
   create_table "workspace_memberships", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "workspace_id", null: false
@@ -186,14 +188,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_31_212508) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "api_credentials", "integrations"
+  add_foreign_key "api_credentials", "organizations"
   add_foreign_key "campaigns", "integrations"
   add_foreign_key "campaigns", "organizations"
   add_foreign_key "comments", "snap_shots"
   add_foreign_key "comments", "users"
   add_foreign_key "domain_schedules", "domains"
   add_foreign_key "domains", "users"
-  add_foreign_key "integration_credentials", "integrations"
-  add_foreign_key "integration_credentials", "organizations"
   add_foreign_key "organization_memberships", "organizations"
   add_foreign_key "organization_memberships", "users"
   add_foreign_key "site_roles", "users"
