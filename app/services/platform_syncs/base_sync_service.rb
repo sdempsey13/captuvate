@@ -1,7 +1,7 @@
 module PlatformSyncs
   class BaseSyncService
-    def initialize(integration_credential)
-      @integration_credential = integration_credential
+    def initialize(api_credential)
+      @api_credential = api_credential
     end
 
     def sync!
@@ -10,6 +10,6 @@ module PlatformSyncs
 
     private
 
-    attr_reader :integration_credential
+    attr_reader :api_credential
   end
 end

@@ -1,10 +1,10 @@
 
-<%= form_with model: integration_credential, url: settings_api_keys_path, class: "needs-validation" do |form| %>
-    <% if integration_credential.errors.any? %>
+<%= form_with model: api_credential, url: settings_api_keys_path, class: "needs-validation" do |form| %>
+    <% if api_credential.errors.any? %>
       <div class="alert alert-danger">
         <p class="mb-1"><strong>Could not save API key:</strong></p>
         <ul class="mb-0">
-          <% integration_credential.errors.full_messages.each do |message| %>
+          <% api_credential.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>
         </ul>

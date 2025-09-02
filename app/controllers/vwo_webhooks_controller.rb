@@ -13,14 +13,14 @@ class VwoWebhooksController < ApplicationController
     #find this companies api_credential
     #either match it off the secret key? or info in the payload, like account_id from VWO side
     binding.pry
-    integration_credential = find_integration_credential(signature)
+    api_credential = find_api_credential(signature)
     
-    def find_integration_credential(signature)
-      WebhookCredential.where(encrypted_secret_key: signature).first.organization.integration_credentials.first
+    def find_api_credential(signature)
+      WebhookCredential.where(encrypted_secret_key: signature).first.organization.api_credentials.first
     end
 
     binding.pry
-    PlatformSyncOrchetsatorJob.perform_later(integration_credential)
+    PlatformSyncOrchetsatorJob.perform_later(api_credential)
 
     head :ok
   rescue JSON::ParserError => e

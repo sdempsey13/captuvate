@@ -5,7 +5,7 @@ module PlatformSyncs
     require 'json'
     
     def sync!
-      response = call_vwo_api(@integration_credential)
+      response = call_vwo_api(@api_credential)
       json_data = parse_response_to_json(response)
 
       rows = collect_rows(json_data)
@@ -14,7 +14,7 @@ module PlatformSyncs
 
     private
 
-    def call_vwo_api(integration_credential)
+    def call_vwo_api(api_credential)
       url = URI("https://app.vwo.com/api/v2/accounts/current/campaigns?limit=25&offset=0")
   
       http = Net::HTTP.new(url.host, url.port)
@@ -22,7 +22,7 @@ module PlatformSyncs
   
       request = Net::HTTP::Get.new(url)
       request["accept"] = 'application/json'
-      request["token"] = integration_credential.encrypted_api_key
+      request["token"] = api_credential.encrypted_api_key
   
       response = http.request(request)
     end
@@ -35,8 +35,8 @@ module PlatformSyncs
       json_data.map do |campaign|
         {
           name:                 campaign["name"],
-          integration_id:       @integration_credential.integration.id,
-          organization_id:      @integration_credential.organization.id,
+          integration_id:       @api_credential.integration.id,
+          organization_id:      @api_credential.organization.id,
           external_id:          campaign["id"],
           status:               campaign["status"],
           campaign_created_at:  Time.at(campaign["createdOn"]),

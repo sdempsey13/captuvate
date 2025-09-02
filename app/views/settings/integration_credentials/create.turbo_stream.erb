@@ -1,2 +1,0 @@
-<%= turbo_stream.prepend "integration-credential-list", partial: "settings/integration_credentials/credential", locals: { credential: @integration_credential } %>
-<%= turbo_stream.replace "integration_credential_form", partial: "settings/integration_credentials/form", locals: { integration_credential: IntegrationCredential.new } %>
