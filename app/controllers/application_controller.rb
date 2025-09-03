@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   layout :set_devise_layout
 
   helper_method :current_organization
+  helper_method :current_workspace
 
   rescue_from Pundit::NotAuthorizedError, with: :not_authorized
 
@@ -28,10 +29,22 @@ class ApplicationController < ActionController::Base
   def current_organization
     return @current_organization if defined?(@current_organization)
 
-    if current_user.site_admin? && params[:organization_id]
-      @current_organization = Organization.find_by(id: params[:organization_id])
+    if current_user.site_admin? && params[:organization_id].present?
+      org = Organization.find_by(id: params[:organization_id])
+      raise ActiveRecord::RecordNotFound unless org
+      @current_organization = org
     else
       @current_organization = current_user.organization
+    end
+  end
+
+  def current_workspace
+    return @current_workspace if defined?(@current_workspace)
+  
+    if current_user.site_admin? && params[:workspace_id]
+      @current_workspace = Workspace.find_by(id: params[:workspace_id])
+    else
+      @current_workspace = current_organization.workspaces.first
     end
   end
 

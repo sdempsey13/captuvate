@@ -7,16 +7,24 @@ module Settings
     end
 
     def create
-      @api_credential = current_organization.api_credentials.build(api_credentials_params)
-      @api_credential.organization_id = current_organization.id
-
+      workspace = current_workspace
+    
+      @integration = workspace.integrations.create(
+        integration_type_id: api_credentials_params[:integration_type_id],
+        status: 0
+      )
+    
+      @api_credential = @integration.api_credentials.build(
+        encrypted_api_key: api_credentials_params[:encrypted_api_key]
+      )
+    binding.pry
       if @api_credential.save
         respond_to do |format|
           format.turbo_stream
           format.html { redirect_to settings_api_keys_path, notice: 'API stored successfully' }
         end
       else
-        @api_credentials = current_organization.api_credentials
+        @api_credentials = workspace.integrations.map(&:api_credentials).flatten
     
         respond_to do |format|
           format.turbo_stream do
@@ -45,7 +53,7 @@ module Settings
     private
 
     def api_credentials_params
-      params.require(:api_credential).permit(:encrypted_api_key, :integration_id)
+      params.require(:api_credential).permit(:encrypted_api_key, :integration_type_id)
     end
   end
 end

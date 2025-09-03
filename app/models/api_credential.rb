@@ -2,9 +2,8 @@ class ApiCredential < ApplicationRecord
   belongs_to :integration
 
   validates :encrypted_api_key, presence: :true
-  validates :workspace, presence: true
   validates :integration, presence: true
-  validates :integration_id, uniqueness: { scope: :organization_id, message: 'You already have an API Key set for this integration' }
+  validates :integration_id, uniqueness: true
 
   encrypts :encrypted_api_key
 
