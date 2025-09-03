@@ -36,7 +36,7 @@ module PlatformSyncs
         {
           name:                 campaign["name"],
           integration_id:       @api_credential.integration.id,
-          organization_id:      @api_credential.organization.id,
+          workspace_id:         @api_credential.integration.workspace.id,
           external_id:          campaign["id"],
           status:               campaign["status"],
           campaign_created_at:  Time.at(campaign["createdOn"]),
@@ -46,7 +46,7 @@ module PlatformSyncs
     end
 
     def upsert_rows(rows)
-      Campaign.upsert_all(rows, unique_by: :index_campaigns_on_external_platform_org)
+      Campaign.upsert_all(rows, unique_by: :index_campaigns_on_external_id_workspace_integration)
     end
   end
 end

@@ -17,7 +17,7 @@ module Settings
       @api_credential = @integration.api_credentials.build(
         encrypted_api_key: api_credentials_params[:encrypted_api_key]
       )
-    binding.pry
+
       if @api_credential.save
         respond_to do |format|
           format.turbo_stream

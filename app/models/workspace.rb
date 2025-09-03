@@ -10,4 +10,6 @@ class Workspace < ApplicationRecord
   has_many :integrations, dependent: :destroy
   has_many :api_credentials, through: :integrations
   has_many :webhook_credentials, through: :integrations
+
+  has_many :campaigns, dependent: :nullify
 end
