@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_02_215339) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_03_003618) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -43,14 +43,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_02_215339) do
   end
 
   create_table "api_credentials", force: :cascade do |t|
-    t.bigint "organization_id", null: false
     t.bigint "integration_id", null: false
     t.text "encrypted_api_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "masked_api_key"
     t.index ["integration_id"], name: "index_api_credentials_on_integration_id"
-    t.index ["organization_id"], name: "index_api_credentials_on_organization_id"
   end
 
   create_table "campaigns", force: :cascade do |t|
@@ -102,12 +100,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_02_215339) do
     t.index ["user_id"], name: "index_domains_on_user_id"
   end
 
-  create_table "integrations", force: :cascade do |t|
+  create_table "integration_types", force: :cascade do |t|
     t.string "display_name", null: false
+    t.string "key", null: false
+    t.integer "category"
+    t.boolean "enabled", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "platform"
-    t.index ["display_name"], name: "index_integrations_on_display_name", unique: true
+    t.index ["key"], name: "index_integration_types_on_key", unique: true
+  end
+
+  create_table "integrations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status"
+    t.bigint "workspace_id", null: false
+    t.bigint "integration_type_id", null: false
+    t.index ["integration_type_id"], name: "index_integrations_on_integration_type_id"
+    t.index ["workspace_id"], name: "index_integrations_on_workspace_id"
   end
 
   create_table "organization_memberships", force: :cascade do |t|
@@ -156,14 +166,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_02_215339) do
   end
 
   create_table "webhook_credentials", force: :cascade do |t|
-    t.bigint "organization_id", null: false
     t.bigint "integration_id", null: false
     t.string "encrypted_secret_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["integration_id"], name: "index_webhook_credentials_on_integration_id"
-    t.index ["organization_id", "integration_id"], name: "idx_on_organization_id_integration_id_b952700e68", unique: true
-    t.index ["organization_id"], name: "index_webhook_credentials_on_organization_id"
   end
 
   create_table "workspace_memberships", force: :cascade do |t|
@@ -189,19 +196,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_02_215339) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "api_credentials", "integrations"
-  add_foreign_key "api_credentials", "organizations"
   add_foreign_key "campaigns", "integrations"
   add_foreign_key "campaigns", "organizations"
   add_foreign_key "comments", "snap_shots"
   add_foreign_key "comments", "users"
   add_foreign_key "domain_schedules", "domains"
   add_foreign_key "domains", "users"
+  add_foreign_key "integrations", "integration_types"
+  add_foreign_key "integrations", "workspaces"
   add_foreign_key "organization_memberships", "organizations"
   add_foreign_key "organization_memberships", "users"
   add_foreign_key "site_roles", "users"
   add_foreign_key "snap_shots", "domains"
   add_foreign_key "webhook_credentials", "integrations"
-  add_foreign_key "webhook_credentials", "organizations"
   add_foreign_key "workspace_memberships", "users"
   add_foreign_key "workspace_memberships", "workspaces"
   add_foreign_key "workspaces", "organizations"

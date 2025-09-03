@@ -1,5 +1,4 @@
 class ApiCredential < ApplicationRecord
-  belongs_to :workspace
   belongs_to :integration
 
   validates :encrypted_api_key, presence: :true

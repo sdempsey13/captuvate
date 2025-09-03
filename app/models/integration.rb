@@ -1,8 +1,22 @@
 class Integration < ApplicationRecord
-  validates :display_name, presence: true, uniqueness: true
+  belongs_to :workspace
+  validates :workspace, presence: true
 
-  has_many :api_credentials
-  has_many :webhook_credentials
+  belongs_to :integration_type
+  validates :integration_type, presence: true
+
+  validates :status, presence: true, inclusion: { in: %w[active disconnected error] }
+
+  has_many :api_credentials, dependent: :destroy
+  has_many :webhook_credentials, dependent: :destroy
 
   has_many :campaigns
+
+  enum :status, { active: 0 }
 end
+
+
+
+
+
+
