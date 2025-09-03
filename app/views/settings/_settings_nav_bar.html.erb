@@ -4,6 +4,10 @@
       <%= icon "key", style: "width: 1.25em; height: 1.25em;" %>
       <span>API Key</span>
     <% end %>
+    <%= link_to settings_webhooks_path, class: "nav-link d-flex align-items-center gap-2 px-2 py-2 rounded fw-semibold text-dark #{'active' if current_page?(settings_webhooks_path)}" do %>
+      <%= icon "signal", style: "width: 1.25em; height: 1.25em;" %>
+      <span>Webhooks</span>
+    <% end %>
   <%# Add other links here when you expand settings %>
   </nav>
 </aside>

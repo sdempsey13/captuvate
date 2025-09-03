@@ -1,0 +1,2 @@
+<%= turbo_stream.prepend "integration-credential-list", partial: "settings/api_credentials/credential", locals: { credential: @api_credential } %>
+<%= turbo_stream.replace "api_credential_form", partial: "settings/api_credentials/form", locals: { api_credential: ApiCredential.new } %>

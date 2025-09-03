@@ -1,5 +1,5 @@
 <ul class="list-group mt-4" id="integration-credential-list">
-  <% integration_credentials.each do |credential| %>
+  <% api_credentials.each do |credential| %>
     <%= render partial: "credential", locals: { credential: credential } %>
   <% end %>
 </ul>

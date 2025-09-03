@@ -1,0 +1,25 @@
+
+<%= form_with model: webhook_credential, url: settings_webhooks_path, class: "needs-validation" do |form| %>
+    <% if webhook_credential.errors.any? %>
+      <div class="alert alert-danger">
+        <p class="mb-1"><strong>Could not save Webhook Secret key:</strong></p>
+        <ul class="mb-0">
+          <% webhook_credential.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    <div class="mb-3">
+      <%= form.label :integration_id, "Integration", class: "form-label" %>
+      <%= form.collection_select :integration_id, Integration.all, :id, :display_name, { prompt: "Select an Integration" }, { class: "form-select" } %>
+    </div>
+  
+    <div class="mb-3">
+      <%= form.label :encrypted_secret_key, "Secret Key", class: "form-label" %>
+      <%= form.text_field :encrypted_secret_key, class: "form-control", autocomplete: "off", placeholder: "Paste your webhook secret key here" %>
+    </div>
+  
+    <%= form.submit "Save", class: "btn btn-primary" %>
+<% end %>
